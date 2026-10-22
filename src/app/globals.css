@@ -1,0 +1,253 @@
+@import "tailwindcss";
+
+/* ─── Design tokens ──────────────────────────────────────────────────────────
+   Warm paper, charcoal ink, stone neutrals and a single rosewood accent.
+   Every component reads from these tokens; nothing hard-codes a colour. */
+@theme {
+  --color-paper: #f6f2ec;
+  --color-paper-raised: #fbf9f5;
+  --color-paper-sunk: #ede6db;
+  --color-ink: #1d1b18;
+  --color-ink-soft: #3a3631;
+  --color-muted: #675f56;
+  --color-faint: #958a7e;
+  --color-line: #e0d8cc;
+  --color-line-strong: #c9bdad;
+  --color-stone: #b5a794;
+  --color-sand: #d8cbb8;
+  --color-rosewood: #7a3b2e;
+  --color-rosewood-deep: #5e2b21;
+  --color-rosewood-tint: #f1e3dc;
+  --color-moss: #4c5a43;
+  --color-moss-tint: #e4e8dc;
+  --color-amber: #8a5a14;
+  --color-amber-tint: #f4e7cf;
+  --color-danger: #9a2d20;
+  --color-danger-tint: #f6dfda;
+  --color-surface: #ffffff;
+  --color-canvas: #f1ede6;
+
+  --shadow-card: 0 1px 2px rgb(29 27 24 / 0.04), 0 1px 1px rgb(29 27 24 / 0.03);
+  --shadow-raised: 0 10px 30px -12px rgb(29 27 24 / 0.18), 0 2px 6px rgb(29 27 24 / 0.05);
+
+  --font-display: var(--font-cormorant), "Cormorant Garamond", ui-serif, Georgia, serif;
+  --font-sans: var(--font-hanken), "Hanken Grotesk", ui-sans-serif, system-ui, sans-serif;
+
+  --text-display: clamp(3rem, 2rem + 5vw, 7.5rem);
+  --text-display--line-height: 0.95;
+  --text-display--letter-spacing: -0.02em;
+  --text-headline: clamp(2.25rem, 1.6rem + 2.6vw, 4rem);
+  --text-headline--line-height: 1.02;
+  --text-headline--letter-spacing: -0.015em;
+  --text-title: clamp(1.6rem, 1.3rem + 1vw, 2.25rem);
+  --text-title--line-height: 1.1;
+  --text-eyebrow: 0.72rem;
+  --text-eyebrow--line-height: 1;
+  --text-eyebrow--letter-spacing: 0.18em;
+
+  --radius-xs: 2px;
+  --radius-sm: 4px;
+  --radius-md: 8px;
+
+  --ease-editorial: cubic-bezier(0.22, 0.61, 0.36, 1);
+  --ease-out-soft: cubic-bezier(0.16, 1, 0.3, 1);
+
+  --animate-fade-up: fade-up 700ms var(--ease-out-soft) both;
+  --animate-fade-in: fade-in 500ms var(--ease-editorial) both;
+  --animate-shimmer: shimmer 1.6s linear infinite;
+  --animate-hero-zoom: hero-zoom 14s var(--ease-out-soft) both;
+
+  --breakpoint-3xl: 112rem;
+
+  @keyframes fade-up {
+    from {
+      opacity: 0;
+      transform: translateY(14px);
+    }
+    to {
+      opacity: 1;
+      transform: none;
+    }
+  }
+  @keyframes fade-in {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+  @keyframes hero-zoom {
+    from {
+      transform: scale(1.06);
+    }
+    to {
+      transform: scale(1);
+    }
+  }
+  @keyframes shimmer {
+    from {
+      background-position: 200% 0;
+    }
+    to {
+      background-position: -200% 0;
+    }
+  }
+}
+
+:root {
+  --duration-fast: 160ms;
+  --duration-base: 320ms;
+  --duration-slow: 700ms;
+  --gutter: 1rem;
+  --header-height: 4.5rem;
+  color-scheme: light;
+}
+
+@media (min-width: 40rem) {
+  :root {
+    --gutter: 2rem;
+  }
+}
+@media (min-width: 80rem) {
+  :root {
+    --gutter: 3rem;
+  }
+}
+
+/* ─── Base ──────────────────────────────────────────────────────────────── */
+@layer base {
+  html {
+    -webkit-text-size-adjust: 100%;
+    scroll-padding-top: calc(var(--header-height) + 1rem);
+  }
+
+  body {
+    background-color: var(--color-paper);
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    font-size: 1rem;
+    line-height: 1.65;
+    text-rendering: optimizeLegibility;
+    font-feature-settings: "ss01", "kern";
+  }
+
+  h1,
+  h2,
+  h3 {
+    font-family: var(--font-display);
+    font-weight: 500;
+    text-wrap: balance;
+  }
+
+  p {
+    text-wrap: pretty;
+  }
+
+  ::selection {
+    background: var(--color-rosewood-tint);
+    color: var(--color-rosewood-deep);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-rosewood);
+    outline-offset: 3px;
+    border-radius: var(--radius-xs);
+  }
+
+  [hidden] {
+    display: none !important;
+  }
+
+  dialog::backdrop {
+    background: rgb(20 18 16 / 0.92);
+  }
+}
+
+/* ─── Utilities ─────────────────────────────────────────────────────────── */
+@utility page-container {
+  width: 100%;
+  max-width: 96rem;
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+}
+
+@utility eyebrow {
+  font-family: var(--font-sans);
+  font-size: var(--text-eyebrow);
+  line-height: var(--text-eyebrow--line-height);
+  letter-spacing: var(--text-eyebrow--letter-spacing);
+  text-transform: uppercase;
+  font-weight: 600;
+  color: var(--color-muted);
+}
+
+@utility link-underline {
+  background-image: linear-gradient(currentColor, currentColor);
+  background-size: 0% 1px;
+  background-position: 0 100%;
+  background-repeat: no-repeat;
+  transition: background-size var(--duration-base) var(--ease-editorial);
+  &:hover,
+  &:focus-visible {
+    background-size: 100% 1px;
+  }
+}
+
+@utility skeleton {
+  background: linear-gradient(
+    90deg,
+    var(--color-paper-sunk) 0%,
+    var(--color-paper-raised) 50%,
+    var(--color-paper-sunk) 100%
+  );
+  background-size: 200% 100%;
+  animation: var(--animate-shimmer);
+}
+
+@utility prose-editorial {
+  font-size: 1.0625rem;
+  line-height: 1.8;
+  color: var(--color-ink-soft);
+  & > * + * {
+    margin-top: 1.25em;
+  }
+  & h2 {
+    font-size: 1.75rem;
+    line-height: 1.2;
+    color: var(--color-ink);
+    margin-top: 2.25em;
+  }
+  & ul {
+    list-style: none;
+    padding: 0;
+  }
+  & li {
+    position: relative;
+    padding-left: 1.25em;
+  }
+  & li + li {
+    margin-top: 0.5em;
+  }
+  & li::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0.8em;
+    width: 0.5em;
+    height: 1px;
+    background: var(--color-stone);
+  }
+}
+
+/* ─── Motion preferences ────────────────────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
