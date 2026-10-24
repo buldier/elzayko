@@ -1,11 +1,10 @@
 "use client";
 
-import { Search, X } from "lucide-react";
+import { RiCloseLine, RiSearchLine } from "@remixicon/react";
 import Form from "next/form";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useTransition } from "react";
-import { Select } from "@/components/ui/form-controls";
 import { galleryHref } from "@/features/media/gallery-url";
 import type { GalleryFilters } from "@/features/media/schemas";
 import { cn } from "@/lib/utils/cn";
@@ -40,9 +39,9 @@ export function MediaFilters({ filters, categories, collections }: Props) {
   }
 
   return (
-    <div className="space-y-6" aria-busy={pending}>
-      <nav aria-label="Filter by type" className="-mx-(--gutter) overflow-x-auto px-(--gutter)">
-        <ul className="flex min-w-max gap-7 border-b border-line">
+    <div className="space-y-[25px]" aria-busy={pending}>
+      <nav aria-label="Filter by type" className="overflow-x-auto">
+        <ul className="flex min-w-max flex-wrap gap-[10px] md:gap-[15px]">
           {TYPES.map((type) => {
             const active = filters.type === type.value;
             return (
@@ -51,10 +50,7 @@ export function MediaFilters({ filters, categories, collections }: Props) {
                   href={galleryHref({ ...base, type: type.value })}
                   scroll={false}
                   aria-current={active ? "page" : undefined}
-                  className={cn(
-                    "-mb-px inline-block border-b py-3 text-sm tracking-wide transition-colors duration-(--duration-fast)",
-                    active ? "border-ink text-ink" : "border-transparent text-muted hover:text-ink",
-                  )}
+                  className={cn("primary-btn", !active && "with-border border-white/30")}
                 >
                   {type.label}
                 </Link>
@@ -64,7 +60,7 @@ export function MediaFilters({ filters, categories, collections }: Props) {
         </ul>
       </nav>
 
-      <div className="grid gap-3 md:grid-cols-[1fr_14rem_14rem]">
+      <div className="grid gap-[15px] md:grid-cols-[1fr_14rem_14rem] md:gap-[20px]">
         <Form action="/gallery" scroll={false} role="search" className="relative">
           {filters.type !== "all" && <input type="hidden" name="type" value={filters.type} />}
           {filters.category && <input type="hidden" name="category" value={filters.category} />}
@@ -72,7 +68,7 @@ export function MediaFilters({ filters, categories, collections }: Props) {
           <label htmlFor="gallery-search" className="sr-only">
             Search by title, caption or tag
           </label>
-          <Search className="pointer-events-none absolute top-1/2 left-3.5 size-4 -translate-y-1/2 text-muted" aria-hidden="true" />
+          <RiSearchLine className="pointer-events-none absolute top-1/2 left-[15px] size-5 -translate-y-1/2 text-[#a0a0a0] md:left-[20px]" aria-hidden="true" />
           <input
             id="gallery-search"
             name="q"
@@ -80,9 +76,9 @@ export function MediaFilters({ filters, categories, collections }: Props) {
             defaultValue={filters.q}
             placeholder="Search titles, captions, tags…"
             maxLength={100}
-            className="h-11 w-full rounded-sm border border-line-strong bg-paper-raised pr-24 pl-10 text-[0.95rem] placeholder:text-faint focus-visible:border-ink focus-visible:ring-2 focus-visible:ring-rosewood/25 focus-visible:outline-none"
+            className="form-input pr-[110px] pl-[45px] md:pl-[50px]"
           />
-          <button type="submit" className="absolute top-1 right-1 h-9 rounded-xs bg-ink px-3.5 text-xs font-medium tracking-wide text-paper hover:bg-ink-soft">
+          <button type="submit" className="primary-btn absolute top-[5px] right-[5px] bottom-[5px] !py-0">
             Search
           </button>
         </Form>
@@ -91,36 +87,36 @@ export function MediaFilters({ filters, categories, collections }: Props) {
           <label htmlFor="gallery-category" className="sr-only">
             Category
           </label>
-          <Select id="gallery-category" value={filters.category} onChange={(event) => navigate({ category: event.target.value })}>
+          <select id="gallery-category" className="form-select" value={filters.category} onChange={(event) => navigate({ category: event.target.value })}>
             <option value="">All categories</option>
             {categories.map((category) => (
               <option key={category.slug} value={category.slug}>
                 {category.label}
               </option>
             ))}
-          </Select>
+          </select>
         </div>
 
         <div>
           <label htmlFor="gallery-collection" className="sr-only">
             Collection
           </label>
-          <Select id="gallery-collection" value={filters.collection} onChange={(event) => navigate({ collection: event.target.value })}>
+          <select id="gallery-collection" className="form-select" value={filters.collection} onChange={(event) => navigate({ collection: event.target.value })}>
             <option value="">All collections</option>
             {collections.map((collection) => (
               <option key={collection.slug} value={collection.slug}>
                 {collection.label}
               </option>
             ))}
-          </Select>
+          </select>
         </div>
       </div>
 
       {hasFilters && (
-        <div className="flex flex-wrap items-center gap-2 text-sm">
+        <div className="flex flex-wrap items-center gap-[10px]">
           {filters.q && <FilterChip label={`“${filters.q}”`} href={galleryHref({ ...base, q: "" })} />}
           {filters.tag && <FilterChip label={`#${filters.tag}`} href={galleryHref({ ...base, tag: "" })} />}
-          <Link href="/gallery" scroll={false} className="ml-1 text-muted underline-offset-4 hover:text-ink hover:underline">
+          <Link href="/gallery" scroll={false} className="font-medium text-primary hover:underline">
             Clear all
           </Link>
         </div>
@@ -134,11 +130,11 @@ function FilterChip({ label, href }: { label: string; href: string }) {
     <Link
       href={href}
       scroll={false}
-      className="inline-flex items-center gap-1.5 rounded-full border border-line-strong bg-paper-raised py-1 pr-2 pl-3 text-ink-soft hover:border-ink"
+      className="inline-flex items-center gap-[5px] rounded-[50px] border border-primary bg-white/10 px-[12px] py-[5px] text-sm text-white hover:bg-primary"
       aria-label={`Remove filter ${label}`}
     >
       {label}
-      <X className="size-3.5" aria-hidden="true" />
+      <RiCloseLine className="size-4" aria-hidden="true" />
     </Link>
   );
 }

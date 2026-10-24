@@ -27,6 +27,7 @@
     "@hookform/resolvers": "^5.9.2",
     "@prisma/adapter-pg": "^7.10.1",
     "@prisma/client": "^7.10.1",
+    "@remixicon/react": "^4.9.0",
     "better-auth": "^1.7.12",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",

@@ -26,12 +26,17 @@
   --color-danger-tint: #f6dfda;
   --color-surface: #ffffff;
   --color-canvas: #f1ede6;
+  /* Public site (Musfix theme): black canvas, navy-black panels, a vivid pink accent. */
+  --color-primary: #fa325a;
+  --color-navy-black: #160f1a;
+  --color-body: #666666;
 
   --shadow-card: 0 1px 2px rgb(29 27 24 / 0.04), 0 1px 1px rgb(29 27 24 / 0.03);
   --shadow-raised: 0 10px 30px -12px rgb(29 27 24 / 0.18), 0 2px 6px rgb(29 27 24 / 0.05);
 
   --font-display: var(--font-cormorant), "Cormorant Garamond", ui-serif, Georgia, serif;
   --font-sans: var(--font-hanken), "Hanken Grotesk", ui-sans-serif, system-ui, sans-serif;
+  --font-body: var(--font-poppins), "Poppins", sans-serif;
 
   --text-display: clamp(3rem, 2rem + 5vw, 7.5rem);
   --text-display--line-height: 0.95;
@@ -44,6 +49,7 @@
   --text-eyebrow: 0.72rem;
   --text-eyebrow--line-height: 1;
   --text-eyebrow--letter-spacing: 0.18em;
+  --text-15: 15px;
 
   --radius-xs: 2px;
   --radius-sm: 4px;
@@ -56,6 +62,7 @@
   --animate-fade-in: fade-in 500ms var(--ease-editorial) both;
   --animate-shimmer: shimmer 1.6s linear infinite;
   --animate-hero-zoom: hero-zoom 14s var(--ease-out-soft) both;
+  --animate-slide-in-right: slide-in-right 420ms var(--ease-out-soft) both;
 
   --breakpoint-3xl: 112rem;
 
@@ -77,6 +84,15 @@
       opacity: 1;
     }
   }
+  @keyframes slide-in-right {
+    from {
+      transform: translateX(100%);
+    }
+    to {
+      transform: translateX(0);
+    }
+  }
+
   @keyframes hero-zoom {
     from {
       transform: scale(1.06);
@@ -100,7 +116,7 @@
   --duration-base: 320ms;
   --duration-slow: 700ms;
   --gutter: 1rem;
-  --header-height: 4.5rem;
+  --header-height: 5.5rem;
   color-scheme: light;
 }
 
@@ -120,6 +136,11 @@
   html {
     -webkit-text-size-adjust: 100%;
     scroll-padding-top: calc(var(--header-height) + 1rem);
+  }
+
+  /* Keep the page still while the off-canvas site panel is open. */
+  html:has(dialog[data-scroll-lock][open]) {
+    overflow: hidden;
   }
 
   body {
@@ -161,6 +182,84 @@
 
   dialog::backdrop {
     background: rgb(20 18 16 / 0.92);
+  }
+}
+
+/* ─── Public theme (Musfix) ─────────────────────────────────────────────────
+   Applied by the public layout's `.theme-musfix` wrapper; the admin keeps the
+   paper/ink theme above. Mirrors the template's base styles and components. */
+@layer base {
+  body:has(.theme-musfix) {
+    background-color: var(--color-black);
+  }
+
+  .theme-musfix {
+    @apply bg-black font-body text-sm text-white md:text-15 lg:text-base;
+    font-feature-settings: normal;
+    line-height: 1.5;
+
+    & :where(h1, h2, h3, h4, h5, h6) {
+      @apply font-body font-bold text-white;
+    }
+    & :where(p) {
+      @apply mb-[15px] leading-[1.5];
+    }
+    & :where(p:last-child) {
+      @apply mb-0;
+    }
+    & ::selection {
+      background: var(--color-primary);
+      color: var(--color-white);
+    }
+    & :focus-visible {
+      outline-color: var(--color-primary);
+    }
+  }
+}
+
+@utility container {
+  @apply mx-auto w-full px-[12px] sm:max-w-[540px] md:max-w-[720px] lg:max-w-[960px] xl:max-w-[1308px];
+}
+
+@layer components {
+  .primary-btn {
+    @apply inline-flex cursor-pointer items-center justify-center gap-2 rounded-[5px] border border-primary bg-primary px-[25px] py-[11px] font-medium text-white transition-all duration-300 ease-in-out hover:bg-navy-black md:px-[30px] md:py-[13px];
+
+    &.with-border {
+      @apply bg-transparent hover:bg-navy-black hover:text-white;
+    }
+    &:disabled {
+      @apply pointer-events-none opacity-60;
+    }
+  }
+
+  .form-input {
+    @apply block h-[50px] w-full border border-[#1e1e1e] bg-navy-black px-[15px] text-sm text-white outline-none transition-all duration-300 ease-in-out placeholder:text-[#a0a0a0]/50 focus:border-primary md:h-[55px] md:px-[20px] md:text-15 lg:text-base;
+
+    &[aria-invalid="true"] {
+      @apply border-primary;
+    }
+  }
+  textarea.form-input {
+    @apply h-[150px] pt-[15px] lg:pt-[20px];
+  }
+
+  .form-select {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='%23ff0000' viewBox='0 0 16 16'%3E%3Cpath d='M4.646 6.646a.5.5 0 0 1 .708 0L8 9.293l2.646-2.647a.5.5 0 0 1 .708.708l-3 3a.5.5 0 0 1-.708 0l-3-3a.5.5 0 0 1 0-.708z'/%3E%3C/svg%3E");
+    @apply block h-[50px] w-full cursor-pointer appearance-none border border-[#1e1e1e] bg-navy-black bg-[length:24px] bg-[right_12px_center] bg-no-repeat px-[15px] text-sm text-white outline-none transition-all duration-300 ease-in-out focus:border-primary md:h-[55px] md:px-[20px] md:text-15 lg:text-base;
+  }
+
+  .marquee {
+    animation: marquee 12s linear infinite;
+  }
+}
+
+@keyframes marquee {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-100%);
   }
 }
 
@@ -237,6 +336,23 @@
     width: 0.5em;
     height: 1px;
     background: var(--color-stone);
+  }
+}
+
+/* Long-form text on the dark public theme (the template's policy-page typography). */
+@utility prose-musfix {
+  color: #a0a0a0;
+  & h2 {
+    @apply mb-[15px] text-base !font-semibold text-white md:text-lg lg:text-lg xl:text-xl;
+  }
+  & h2:not(:first-child) {
+    @apply mt-[30px] md:mt-[40px];
+  }
+  & ul {
+    @apply my-[15px] list-inside list-disc last:mb-0;
+  }
+  & li {
+    @apply mb-[8px] leading-[1.7] last:mb-0;
   }
 }
 

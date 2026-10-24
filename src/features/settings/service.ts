@@ -13,6 +13,7 @@ export const DEFAULT_SETTINGS: SiteSettingsData = {
   heroHeading: "Light, held still.",
   heroIntro:
     "A gallery of photographs and short films — landscapes, rooms and small things noticed slowly.",
+  heroMediaId: null,
   contactEmail: null,
   location: null,
   socialLinks: [],
@@ -32,6 +33,7 @@ export async function getSiteSettings(): Promise<SiteSettingsData> {
     description: row.description,
     heroHeading: row.heroHeading,
     heroIntro: row.heroIntro,
+    heroMediaId: row.heroMediaId,
     contactEmail: row.contactEmail,
     location: row.location,
     socialLinks: links.success ? links.data : [],

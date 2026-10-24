@@ -14,6 +14,13 @@ export const siteSettingsSchema = z.object({
   description: z.string().trim().max(300),
   heroHeading: z.string().trim().min(1, "Hero heading is required").max(160),
   heroIntro: z.string().trim().max(600),
+  heroMediaId: z
+    .string()
+    .trim()
+    .max(40)
+    .transform((value) => value || null)
+    .nullable()
+    .default(null),
   contactEmail: z
     .union([z.email("Enter a valid email"), z.literal("")])
     .transform((value) => value || null)

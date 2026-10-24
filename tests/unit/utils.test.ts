@@ -68,6 +68,15 @@ describe("rich text", () => {
       { type: "p", text: "<script>x</script>" },
     ]);
   });
+
+  it("recognises a heading and list written without blank lines between them", () => {
+    expect(parseRichText("## What we collect\n- Name\n- Email\nThat is all.\n\n- separate")).toEqual([
+      { type: "h2", text: "What we collect" },
+      { type: "ul", items: ["Name", "Email"] },
+      { type: "p", text: "That is all." },
+      { type: "ul", items: ["separate"] },
+    ]);
+  });
 });
 
 describe("formatting", () => {

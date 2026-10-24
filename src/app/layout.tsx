@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Cormorant_Garamond, Hanken_Grotesk } from "next/font/google";
+import { Cormorant_Garamond, Hanken_Grotesk, Poppins } from "next/font/google";
 import { siteConfig } from "@/config/site";
 import "./globals.css";
 
@@ -14,6 +14,13 @@ const display = Cormorant_Garamond({
 const sans = Hanken_Grotesk({
   variable: "--font-hanken",
   subsets: ["latin"],
+  display: "swap",
+});
+
+const body = Poppins({
+  variable: "--font-poppins",
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
   display: "swap",
 });
 
@@ -39,7 +46,7 @@ export const viewport: Viewport = {
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
-    <html lang="en" className={`${display.variable} ${sans.variable} antialiased`}>
+    <html lang="en" className={`${display.variable} ${sans.variable} ${body.variable} antialiased`}>
       <body className="flex min-h-dvh flex-col">
         <a
           href="#main"

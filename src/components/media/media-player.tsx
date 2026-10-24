@@ -24,7 +24,7 @@ export function MediaPlayer(props: Props) {
         preload="metadata"
         playsInline
         poster={props.poster?.src}
-        className="max-h-[80vh] w-full bg-ink"
+        className="max-h-[80vh] w-full bg-navy-black"
         style={{ aspectRatio: ratio }}
         aria-label={props.title}
       >
@@ -36,7 +36,7 @@ export function MediaPlayer(props: Props) {
 
   if (activated) {
     return (
-      <div className="relative aspect-video w-full bg-ink">
+      <div className="relative aspect-video w-full bg-navy-black">
         <iframe
           src={`${props.embedUrl}&autoplay=1`}
           title={props.title}
@@ -54,18 +54,18 @@ export function MediaPlayer(props: Props) {
     <button
       type="button"
       onClick={() => setActivated(true)}
-      className="group relative block aspect-video w-full overflow-hidden bg-ink text-left"
+      className="group relative block aspect-video w-full overflow-hidden bg-navy-black text-left"
       aria-label={`Play “${props.title}” (loads ${props.providerLabel})`}
     >
       {props.poster && (
         <MediaImage image={props.poster} alt="" sizes="(min-width: 1024px) 70vw, 100vw" mode="fill" priority className="opacity-85 transition-opacity duration-(--duration-base) group-hover:opacity-100" />
       )}
       <span className="absolute inset-0 flex items-center justify-center">
-        <span className="inline-flex size-20 items-center justify-center rounded-full bg-paper/90 text-ink shadow-lg transition-transform duration-(--duration-base) ease-out-soft group-hover:scale-105">
+        <span className="inline-flex size-[83px] items-center justify-center rounded-full bg-white text-black transition-all duration-300 ease-in-out group-hover:bg-primary group-hover:text-white">
           <Play className="ml-1 size-7 fill-current" aria-hidden="true" />
         </span>
       </span>
-      <span className="absolute bottom-3 left-3 rounded-xs bg-ink/70 px-2 py-1 text-xs text-paper/90">
+      <span className="absolute bottom-3 left-3 bg-black/70 px-2 py-1 text-xs text-white">
         Plays from {props.providerLabel} · privacy-enhanced mode
       </span>
     </button>

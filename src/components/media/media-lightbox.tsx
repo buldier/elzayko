@@ -90,7 +90,7 @@ export function MediaLightbox({ items, index, onIndexChange }: Props) {
                 <button
                   type="button"
                   onClick={() => go(-1)}
-                  className="absolute left-2 inline-flex size-12 items-center justify-center rounded-full bg-ink/40 text-paper hover:bg-ink/70 sm:left-4"
+                  className="absolute left-2 inline-flex size-12 items-center justify-center rounded-full border border-white/30 bg-black/40 text-white transition-all duration-300 hover:border-primary hover:bg-primary sm:left-4"
                   aria-label="Previous image"
                 >
                   <ArrowLeft className="size-5" strokeWidth={1.5} />
@@ -98,7 +98,7 @@ export function MediaLightbox({ items, index, onIndexChange }: Props) {
                 <button
                   type="button"
                   onClick={() => go(1)}
-                  className="absolute right-2 inline-flex size-12 items-center justify-center rounded-full bg-ink/40 text-paper hover:bg-ink/70 sm:right-4"
+                  className="absolute right-2 inline-flex size-12 items-center justify-center rounded-full border border-white/30 bg-black/40 text-white transition-all duration-300 hover:border-primary hover:bg-primary sm:right-4"
                   aria-label="Next image"
                 >
                   <ArrowRight className="size-5" strokeWidth={1.5} />
@@ -109,7 +109,7 @@ export function MediaLightbox({ items, index, onIndexChange }: Props) {
 
           <div className="flex flex-col gap-2 px-4 py-4 sm:flex-row sm:items-end sm:justify-between sm:px-6">
             <div>
-              <p className="font-display text-2xl text-paper">{current.title}</p>
+              <p className="font-body text-2xl font-bold text-white">{current.title}</p>
               {current.caption && <p className="mt-1 max-w-2xl text-sm text-paper/70">{current.caption}</p>}
             </div>
             <Link

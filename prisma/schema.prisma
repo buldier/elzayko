@@ -242,6 +242,8 @@ model SiteSettings {
   description  String   @db.VarChar(300)
   heroHeading  String   @db.VarChar(160)
   heroIntro    String   @db.VarChar(600)
+  /// Uploaded image behind the homepage hero; falls back to the latest featured work.
+  heroMediaId  String?  @db.VarChar(40)
   contactEmail String?  @db.VarChar(254)
   location     String?  @db.VarChar(120)
   /// Array of { platform, url } validated with Zod.

@@ -15,7 +15,7 @@ import { siteSettingsSchema, type SiteSettingsData, type SiteSettingsInput } fro
 
 type FormValues = SiteSettingsInput;
 
-export function SettingsForm({ settings }: { settings: SiteSettingsData }) {
+export function SettingsForm({ settings, imageOptions }: { settings: SiteSettingsData; imageOptions: { id: string; label: string }[] }) {
   const router = useRouter();
   const { toast } = useToast();
   const [serverError, setServerError] = useState<string | null>(null);
@@ -26,7 +26,7 @@ export function SettingsForm({ settings }: { settings: SiteSettingsData }) {
     formState: { errors, isSubmitting },
   } = useForm<FormValues, unknown, SiteSettingsData>({
     resolver: zodResolver(siteSettingsSchema),
-    defaultValues: { ...settings, contactEmail: settings.contactEmail ?? "", location: settings.location ?? "" },
+    defaultValues: { ...settings, heroMediaId: settings.heroMediaId ?? "", contactEmail: settings.contactEmail ?? "", location: settings.location ?? "" },
   });
   const links = useFieldArray({ control, name: "socialLinks" });
 
@@ -66,6 +66,16 @@ export function SettingsForm({ settings }: { settings: SiteSettingsData }) {
         </Field>
         <Field id="settings-hero-intro" label="Introduction" error={errors.heroIntro?.message}>
           <Textarea id="settings-hero-intro" rows={3} {...register("heroIntro")} />
+        </Field>
+        <Field id="settings-hero-image" label="Background image" hint="Also fills the large site name. Leave empty to use the latest featured work.">
+          <Select id="settings-hero-image" {...register("heroMediaId")} aria-describedby="settings-hero-image-hint">
+            <option value="">Latest featured work</option>
+            {imageOptions.map((option) => (
+              <option key={option.id} value={option.id}>
+                {option.label}
+              </option>
+            ))}
+          </Select>
         </Field>
       </fieldset>
 

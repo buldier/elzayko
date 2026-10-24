@@ -1,6 +1,6 @@
 "use client";
 
-import { Expand } from "lucide-react";
+import { RiFullscreenLine } from "@remixicon/react";
 import { useMemo, useState } from "react";
 import { MediaCard } from "@/components/media/media-card";
 import { MediaLightbox } from "@/components/media/media-lightbox";
@@ -15,9 +15,8 @@ type Props = {
 };
 
 /**
- * Masonry gallery using CSS columns (images keep their natural proportions).
- * Images get a "quick view" button that opens the keyboard-navigable lightbox;
- * the card itself links to the shareable detail page.
+ * Three-column gallery grid in the template's layout. Images get a "quick view"
+ * button that opens the keyboard-navigable lightbox; the card links to the detail page.
  */
 export function MediaGrid({ items, priorityCount = 3, className }: Props) {
   const images = useMemo(() => items.filter((item) => item.preview), [items]);
@@ -25,20 +24,20 @@ export function MediaGrid({ items, priorityCount = 3, className }: Props) {
 
   return (
     <>
-      <ul className={cn("columns-1 gap-5 min-[480px]:columns-2 lg:columns-3 3xl:columns-4", className)}>
+      <ul className={cn("grid grid-cols-1 gap-[25px] sm:grid-cols-2 lg:grid-cols-3", className)}>
         {items.map((item, index) => {
           const imageIndex = images.indexOf(item);
           return (
-            <li key={item.id} className="relative mb-8 break-inside-avoid">
+            <li key={item.id} className="relative">
               <MediaCard media={item} priority={index < priorityCount} />
               {imageIndex >= 0 && (
                 <button
                   type="button"
                   onClick={() => setLightboxIndex(imageIndex)}
-                  className="absolute top-3 right-3 inline-flex size-10 items-center justify-center rounded-full bg-paper/85 text-ink opacity-100 shadow-sm backdrop-blur-sm transition-opacity duration-(--duration-fast) hover:bg-paper focus-visible:opacity-100 sm:opacity-0 sm:[li:hover_&]:opacity-100"
+                  className="absolute top-[10px] right-[10px] inline-flex size-[45px] items-center justify-center rounded-full bg-white text-black opacity-100 transition-all duration-300 ease-in-out hover:bg-primary hover:text-white focus-visible:opacity-100 sm:opacity-0 sm:[li:hover_&]:opacity-100"
                   aria-label={`Quick view: ${item.title}`}
                 >
-                  <Expand className="size-4" strokeWidth={1.5} />
+                  <RiFullscreenLine className="size-5" aria-hidden="true" />
                 </button>
               )}
             </li>

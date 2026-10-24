@@ -1,8 +1,8 @@
 "use client";
 
+import Link from "next/link";
 import { useEffect } from "react";
-import { ErrorState } from "@/components/feedback/states";
-import { Button, ButtonLink } from "@/components/ui/button";
+import { ErrorPanel } from "@/components/site/error-panel";
 
 export default function PublicError({ error, retry }: { error: unknown; retry: () => void }) {
   useEffect(() => {
@@ -10,22 +10,25 @@ export default function PublicError({ error, retry }: { error: unknown; retry: (
   }, [error]);
   const digest = error instanceof Error && "digest" in error ? String(error.digest) : null;
   return (
-    <div className="page-container py-16">
-      <ErrorState
+    <div role="alert">
+      <ErrorPanel
+        artwork={false}
         title="Something went wrong"
         description={
           <>
             This page couldn&rsquo;t be loaded. Please try again in a moment.
-            {digest && <span className="mt-2 block text-xs text-faint">Reference: {digest}</span>}
+            {digest && <span className="mt-2 block text-xs">Reference: {digest}</span>}
           </>
         }
-        action={
-          <div className="flex flex-wrap justify-center gap-3">
-            <Button onClick={() => retry()}>Try again</Button>
-            <ButtonLink href="/" variant="secondary">
+        actions={
+          <>
+            <button type="button" onClick={() => retry()} className="primary-btn">
+              Try again
+            </button>
+            <Link href="/" className="primary-btn with-border">
               Go home
-            </ButtonLink>
-          </div>
+            </Link>
+          </>
         }
       />
     </div>

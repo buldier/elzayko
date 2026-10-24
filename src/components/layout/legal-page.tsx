@@ -1,15 +1,19 @@
+import { PageBanner } from "@/components/site/page-banner";
 import { RichText } from "@/components/ui/rich-text";
 import type { LegalContent } from "@/features/pages/schemas";
 
 export function LegalPage({ title, content }: { title: string; content: LegalContent }) {
   return (
-    <article className="page-container grid gap-12 pt-10 pb-24 md:grid-cols-12 md:pt-16">
-      <header className="md:col-span-4">
-        <p className="eyebrow mb-5">Legal</p>
-        <h1 className="text-headline">{title}</h1>
-        {content.lastUpdated && <p className="mt-6 text-sm text-muted">Last updated: {content.lastUpdated}</p>}
-      </header>
-      <RichText source={content.body} className="max-w-2xl md:col-span-7 md:col-start-6" />
+    <article>
+      <PageBanner title={title} crumbs={[{ label: title }]} featuredIndex={4} />
+      <div className="relative z-[1] py-[60px] md:py-[80px] lg:py-[100px] xl:py-[120px]">
+        <div className="container">
+          <div className="mx-auto xl:max-w-[960px]">
+            {content.lastUpdated && <span className="mb-[15px] block font-medium text-white">Last updated: {content.lastUpdated}</span>}
+            <RichText source={content.body} variant="musfix" />
+          </div>
+        </div>
+      </div>
     </article>
   );
 }

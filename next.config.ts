@@ -49,7 +49,11 @@ const nextConfig: NextConfig = {
     },
   },
   images: {
-    localPatterns: [{ pathname: "/files/derivatives/**", search: "" }],
+    localPatterns: [
+      { pathname: "/files/derivatives/**", search: "" },
+      // Decorative theme artwork (glows, soundwave, 404 art) shipped in /public.
+      { pathname: "/musfix/**", search: "" },
+    ],
     remotePatterns: [
       { protocol: "https", hostname: "i.ytimg.com", pathname: "/vi/**" },
       ...(publicBase

@@ -10,7 +10,7 @@ export const PAGE_DEFAULTS: { [S in PageSlug]: { title: string; content: PageCon
         "Elzayko is a photographer and filmmaker working between landscape, still life and the quiet architecture of everyday rooms.",
       portraitMediaId: null,
       biography:
-        "Trained in printmaking before turning to the camera, Una approaches photography as a craft of patience — returning to the same places across seasons, waiting for light to settle.\n\nHer work has been shown in small independent spaces and printed in limited editions. Alongside personal projects she collaborates with makers, studios and publications who share an interest in material, texture and time.",
+        "Trained in printmaking before turning to the camera, Elzayko approaches photography as a craft of patience — returning to the same places across seasons, waiting for light to settle.\n\nHer work has been shown in small independent spaces and printed in limited editions. Alongside personal projects she collaborates with makers, studios and publications who share an interest in material, texture and time.",
       philosophy:
         "Fewer images, chosen with care. Natural light where possible. Colour that feels remembered rather than invented. Every series begins with a walk and ends with a print.",
       interests: ["Landscape", "Still life", "Architecture", "Analogue film", "Printmaking", "Short documentary"],

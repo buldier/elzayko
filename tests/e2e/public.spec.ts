@@ -9,10 +9,18 @@ test("homepage presents the identity and featured work", async ({ page }) => {
 
 test("primary navigation reaches every public page", async ({ page, isMobile }) => {
   await page.goto("/");
-  for (const name of ["Gallery", "About", "Contact"]) {
+  const destinations = [
+    { name: "Gallery", path: "/gallery" },
+    { name: "About Us", path: "/about", group: "Pages" },
+    { name: "Contact Us", path: "/contact" },
+  ];
+  for (const { name, path, group } of destinations) {
     if (isMobile) await page.getByRole("button", { name: "Open menu" }).click();
-    await page.getByRole("navigation", { name: "Primary" }).getByRole("link", { name, exact: true }).click();
-    await expect(page).toHaveURL(new RegExp(`/${name.toLowerCase()}$`));
+    const nav = page.getByRole("navigation", { name: "Primary" });
+    if (group && isMobile) await nav.getByRole("button", { name: `Show ${group} links` }).click();
+    else if (group) await nav.getByRole("link", { name: group, exact: true }).hover();
+    await nav.getByRole("link", { name, exact: true }).click();
+    await expect(page).toHaveURL(new RegExp(`${path}$`));
     await expect(page.getByRole("heading", { level: 1 })).toBeVisible();
   }
 });

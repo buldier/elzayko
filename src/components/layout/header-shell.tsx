@@ -1,19 +1,17 @@
 "use client";
 
-import { usePathname } from "next/navigation";
 import { useEffect, useState, type ReactNode } from "react";
 import { cn } from "@/lib/utils/cn";
 
-/** Routes whose first section is a full-bleed image the header floats over. */
-const OVERLAY_ROUTES = new Set(["/"]);
+// Always a solid bar so the menu reads clearly over any banner; it only tightens on scroll.
+const shellClass =
+  "group/header fixed top-0 right-0 left-0 z-40 border-b border-white/10 bg-navy-black text-white transition-all duration-300 ease-in-out";
+// Compact height (the theme's scrolled padding) at all times.
+const topPadding = "py-[10px] md:py-[15px] lg:py-[5px] xl:py-[10px]";
+const stickyPadding = `${topPadding} shadow-[0_10px_30px_-15px_rgb(0_0_0/0.8)]`;
 
-/**
- * Sticky header that is transparent (light text) over the homepage hero and becomes
- * a solid paper bar once the visitor scrolls. Children style themselves with
- * `group-data-[overlay=true]/header:` variants.
- */
+/** Fixed navy-black header, identical on every page; it tightens once the visitor scrolls. */
 export function HeaderShell({ children }: { children: ReactNode }) {
-  const pathname = usePathname();
   const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {
@@ -23,26 +21,17 @@ export function HeaderShell({ children }: { children: ReactNode }) {
     return () => window.removeEventListener("scroll", update);
   }, []);
 
-  const overlay = OVERLAY_ROUTES.has(pathname) && !scrolled;
   return (
-    <header
-      data-overlay={overlay}
-      className={cn(
-        "group/header sticky top-0 z-40 transition-[background-color,border-color,color] duration-(--duration-base) ease-editorial",
-        overlay
-          ? "border-b border-transparent bg-transparent text-paper"
-          : "border-b border-line/70 bg-paper/90 text-ink backdrop-blur-md supports-[backdrop-filter]:bg-paper/75",
-      )}
-    >
+    <header data-overlay={!scrolled} className={cn(shellClass, scrolled ? stickyPadding : topPadding)}>
       {children}
     </header>
   );
 }
 
-/** Server fallback: always the solid variant. */
+/** Server fallback: the top-of-page state. */
 export function HeaderShellFallback({ children }: { children: ReactNode }) {
   return (
-    <header data-overlay={false} className="group/header sticky top-0 z-40 border-b border-line/70 bg-paper/90 text-ink backdrop-blur-md">
+    <header data-overlay className={cn(shellClass, topPadding)}>
       {children}
     </header>
   );

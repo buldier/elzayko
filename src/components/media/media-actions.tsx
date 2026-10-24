@@ -1,15 +1,15 @@
 "use client";
 
-import { Check, Download, Share2 } from "lucide-react";
+import { RiCheckLine, RiDownload2Line, RiShareLine } from "@remixicon/react";
 import { useState } from "react";
-import { buttonVariants } from "@/components/ui/button";
-import { cn } from "@/lib/utils/cn";
+
+const outlineClass = "primary-btn with-border !border-white hover:!bg-white hover:!text-primary";
 
 /** Rendered only for downloadable images; the endpoint re-checks eligibility server-side. */
 export function DownloadButton({ href, title }: { href: string; title: string }) {
   return (
-    <a href={href} download className={cn(buttonVariants({ variant: "primary" }))} aria-label={`Download “${title}”`}>
-      <Download aria-hidden="true" />
+    <a href={href} download className="primary-btn" aria-label={`Download “${title}”`}>
+      <RiDownload2Line className="size-4" aria-hidden="true" />
       Download image
     </a>
   );
@@ -38,8 +38,8 @@ export function ShareButton({ url, title }: { url: string; title: string }) {
   }
 
   return (
-    <button type="button" onClick={share} className={cn(buttonVariants({ variant: "secondary" }))}>
-      {copied ? <Check aria-hidden="true" /> : <Share2 aria-hidden="true" />}
+    <button type="button" onClick={share} className={outlineClass}>
+      {copied ? <RiCheckLine className="size-4" aria-hidden="true" /> : <RiShareLine className="size-4" aria-hidden="true" />}
       <span aria-live="polite">{copied ? "Link copied" : "Share"}</span>
     </button>
   );
