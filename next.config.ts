@@ -30,7 +30,8 @@ const contentSecurityPolicy = [
   "base-uri 'self'",
   "form-action 'self'",
   "frame-ancestors 'none'",
-  isDev ? "" : "upgrade-insecure-requests",
+  // Only when actually served over HTTPS; on a plain-HTTP address it would break every asset.
+  process.env.SITE_URL?.startsWith("https://") ? "upgrade-insecure-requests" : "",
 ]
   .filter(Boolean)
   .join("; ");
