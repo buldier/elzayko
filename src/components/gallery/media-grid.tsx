@@ -24,7 +24,7 @@ export function MediaGrid({ items, priorityCount = 3, className }: Props) {
 
   return (
     <>
-      <ul className={cn("grid grid-cols-1 gap-[25px] sm:grid-cols-2 lg:grid-cols-3", className)}>
+      <ul className={cn("grid grid-cols-1 gap-x-5 gap-y-10 sm:grid-cols-2", className)}>
         {items.map((item, index) => {
           const imageIndex = images.indexOf(item);
           return (
@@ -34,7 +34,7 @@ export function MediaGrid({ items, priorityCount = 3, className }: Props) {
                 <button
                   type="button"
                   onClick={() => setLightboxIndex(imageIndex)}
-                  className="absolute top-[10px] right-[10px] inline-flex size-[45px] items-center justify-center rounded-full bg-white text-black opacity-100 transition-all duration-300 ease-in-out hover:bg-primary hover:text-white focus-visible:opacity-100 sm:opacity-0 sm:[li:hover_&]:opacity-100"
+                  className="absolute top-3 right-3 inline-flex size-10 items-center justify-center rounded-full bg-black/50 text-white opacity-100 backdrop-blur-md transition-all duration-300 ease-in-out hover:bg-primary hover:text-black focus-visible:opacity-100 sm:opacity-0 sm:[li:hover_&]:opacity-100"
                   aria-label={`Quick view: ${item.title}`}
                 >
                   <RiFullscreenLine className="size-5" aria-hidden="true" />

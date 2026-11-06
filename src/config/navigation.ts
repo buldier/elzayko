@@ -1,66 +1,21 @@
 import type { LucideIcon } from "lucide-react";
-import {
-  FileText,
-  FolderOpen,
-  Images,
-  LayoutDashboard,
-  Settings,
-  Tags,
-} from "lucide-react";
+import { FileText, FolderOpen, Images, LayoutDashboard, Settings, Tags } from "lucide-react";
 
-export type PublicNavItem = {
-  label: string;
-  href: string;
-  /** Shown as a dropdown on desktop and an expandable group in the site panel. */
-  children?: readonly { label: string; href: string }[];
-  /** Extra path prefix that also marks the item active (e.g. detail pages). */
-  activePrefix?: string;
-};
+/**
+ * Public side dock (desktop) and mobile menu. `icon` keys are resolved to glyphs in the
+ * client component. Hash links point at sections of the home page.
+ */
+export const dockNavigation = [
+  { label: "Home", href: "/", icon: "home" },
+  { label: "About", href: "/about", icon: "about" },
+  { label: "Journey", href: "/#journey", icon: "journey" },
+  { label: "Work", href: "/#work", icon: "work" },
+  { label: "Collections", href: "/#collections", icon: "collections" },
+  { label: "Gallery", href: "/gallery", icon: "gallery" },
+  { label: "Contact", href: "/contact", icon: "contact" },
+] as const;
 
-/** Flat list of the main pages (footer "Explore" column). */
-export const publicNavigation: readonly PublicNavItem[] = [
-  { label: "Home", href: "/" },
-  { label: "Gallery", href: "/gallery" },
-  { label: "About", href: "/about" },
-  { label: "Contact", href: "/contact" },
-];
-
-/** Header and site-panel menu, shaped like the theme's: dropdown groups plus a final contact link. */
-export function headerNavigation(collections: readonly { title: string; slug: string }[]): PublicNavItem[] {
-  return [
-    { label: "Home", href: "/" },
-    {
-      label: "Gallery",
-      href: "/gallery",
-      activePrefix: "/gallery/",
-      children: [
-        { label: "All work", href: "/gallery" },
-        { label: "Photographs", href: "/gallery?type=image" },
-        { label: "Films", href: "/gallery?type=video" },
-        { label: "Elsewhere", href: "/gallery?type=link" },
-      ],
-    },
-    ...(collections.length > 0
-      ? [
-          {
-            label: "Collections",
-            href: `/gallery?collection=${collections[0]!.slug}`,
-            children: collections.slice(0, 8).map((collection) => ({ label: collection.title, href: `/gallery?collection=${collection.slug}` })),
-          },
-        ]
-      : []),
-    {
-      label: "Pages",
-      href: "/about",
-      children: [
-        { label: "About Us", href: "/about" },
-        { label: "Privacy Policy", href: "/privacy" },
-        { label: "Terms of Service", href: "/terms" },
-      ],
-    },
-    { label: "Contact Us", href: "/contact" },
-  ];
-}
+export type DockIcon = (typeof dockNavigation)[number]["icon"];
 
 export const legalNavigation = [
   { label: "Privacy", href: "/privacy" },

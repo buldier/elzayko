@@ -8,7 +8,7 @@ import { sendContactMessage } from "@/features/contact/actions";
 import type { ContactFormState } from "@/features/contact/schemas";
 
 const initialState: ContactFormState = { status: "idle" };
-const inputClass = "form-input !bg-black";
+const inputClass = "form-input";
 
 export function ContactForm() {
   const [state, formAction, pending] = useActionState(sendContactMessage, initialState);
@@ -141,7 +141,7 @@ function FormField({ id, label, hint, error, required, className, children }: Fo
   return (
     <div className={className}>
       <label htmlFor={id} className="mb-[8px] block text-[#a0a0a0]">
-        {label} {required && <span className="text-[#FF0004]" aria-hidden="true">*</span>}
+        {label} {required && <span className="text-[#ff6b6b]" aria-hidden="true">*</span>}
       </label>
       {children}
       {hint && !message && (
@@ -150,7 +150,7 @@ function FormField({ id, label, hint, error, required, className, children }: Fo
         </p>
       )}
       {message && (
-        <p id={`${id}-error`} role="alert" className="mt-[6px] text-sm font-medium text-primary">
+        <p id={`${id}-error`} role="alert" className="mt-[6px] text-sm font-medium text-[#ff6b6b]">
           {message}
         </p>
       )}
@@ -162,9 +162,9 @@ function FormAlert({ tone, icon, children }: { tone: "success" | "error"; icon: 
   return (
     <div
       role={tone === "error" ? "alert" : "status"}
-      className={`mb-[20px] flex items-start gap-[10px] border px-[15px] py-[12px] md:mb-[25px] ${tone === "error" ? "border-primary/60 bg-primary/10 text-white" : "border-emerald-500/50 bg-emerald-500/10 text-white"}`}
+      className={`mb-[20px] flex items-start gap-[10px] border px-[15px] py-[12px] md:mb-[25px] ${tone === "error" ? "rounded-2xl border-[#ff6b6b]/50 bg-[#ff6b6b]/10 text-white" : "rounded-2xl border-primary/50 bg-primary/10 text-white"}`}
     >
-      <span className={tone === "error" ? "text-primary" : "text-emerald-400"} aria-hidden="true">
+      <span className={tone === "error" ? "text-[#ff6b6b]" : "text-primary"} aria-hidden="true">
         {icon}
       </span>
       <div>{children}</div>

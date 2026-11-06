@@ -1,16 +1,13 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { SiteFooter } from "@/components/layout/site-footer";
-import { SiteHeader } from "@/components/layout/site-header";
 import { ErrorPanel } from "@/components/site/error-panel";
 
 export const metadata: Metadata = { title: "Page not found", robots: { index: false } };
 
 export default function NotFound() {
   return (
-    <div className="theme-musfix flex min-h-dvh flex-1 flex-col">
-      <SiteHeader />
-      <main id="main" className="flex-1">
+    <div className="theme-isak flex min-h-dvh flex-1 flex-col bg-[#0f0f0f]">
+      <main id="main" className="grid flex-1 place-items-center px-5">
         <ErrorPanel
           title="OOPS... Page Not Found"
           description="The page you are looking for might have been moved, unpublished or never existed."
@@ -26,7 +23,6 @@ export default function NotFound() {
           }
         />
       </main>
-      <SiteFooter />
     </div>
   );
 }

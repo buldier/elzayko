@@ -43,7 +43,7 @@ export default function MediaDetailRoute({ params }: PageProps<"/gallery/[slug]"
   );
 }
 
-const sectionTitle = "!font-semibold text-3xl md:text-5xl lg:text-6xl xl:text-[64px] leading-[1.1]";
+const sectionTitle = "text-[clamp(1.9rem,3.6vw,2.6rem)]";
 
 async function MediaDetail({ params }: Pick<PageProps<"/gallery/[slug]">, "params">) {
   const { slug } = await params;
@@ -61,17 +61,18 @@ async function MediaDetail({ params }: Pick<PageProps<"/gallery/[slug]">, "param
           ...(media.category ? [{ label: media.category.name, href: galleryHref({ category: media.category.slug }) }] : []),
           { label: typeLabel(media) },
         ]}
-        featuredIndex={2}
+        image={null}
+        intro={media.caption}
       />
 
-      <div className="relative z-[1] py-[60px] md:py-[80px] lg:py-[100px] xl:py-[120px]">
-        <div className="container">
-          <div className="grid grid-cols-1 gap-[25px] lg:grid-cols-3">
-            <div className="lg:col-span-2">
+      <div className="pt-6 pb-16 md:pb-24">
+        <div>
+          <div className="grid grid-cols-1 gap-10">
+            <div>
               <MediaStage media={media} />
-              <ul className="my-[15px] text-[#a0a0a0] md:my-[20px]">
+              <ul className="my-[15px] text-white/55 md:my-[20px]">
                 <li className="mt-[8px] mr-[15px] inline-block text-white md:mr-[25px]">
-                  Type: <span className="text-[#a0a0a0]">{typeLabel(media)}</span>
+                  Type: <span className="text-white/55">{typeLabel(media)}</span>
                 </li>
                 {media.publishedAt && (
                   <MetaItem icon={<RiCalendarLine className="size-4 text-white" />}>{formatDate(media.publishedAt)}</MetaItem>
@@ -89,10 +90,9 @@ async function MediaDetail({ params }: Pick<PageProps<"/gallery/[slug]">, "param
                   </MetaItem>
                 )}
               </ul>
-              {media.caption && <p className="text-base font-semibold text-white md:text-lg">{media.caption}</p>}
               {media.description &&
                 media.description.split(/\n{2,}/).map((paragraph, index) => (
-                  <p key={index} className="text-[#a0a0a0] md:!mb-[20px] md:last:!mb-0">
+                  <p key={index} className="text-white/55 md:!mb-[20px] md:last:!mb-0">
                     {paragraph}
                   </p>
                 ))}
@@ -107,12 +107,12 @@ async function MediaDetail({ params }: Pick<PageProps<"/gallery/[slug]">, "param
               </div>
             </div>
 
-            <aside className="lg:col-span-1">
-              <div className="mb-[25px] bg-navy-black p-[20px] md:p-[25px] lg:p-[30px]">
+            <aside className="grid gap-4 sm:grid-cols-2">
+              <div className="rounded-[20px] border border-white/5 bg-[#161616] p-6 md:p-7">
                 <h2 className="mb-[15px] border-b border-dashed border-white/20 pb-[5px] text-base !font-semibold md:mb-[20px] md:pb-[10px] md:text-lg lg:mb-[25px] lg:text-xl">
                   Details
                 </h2>
-                <dl className="text-[#a0a0a0]">
+                <dl className="text-white/55">
                   {media.publishedAt && <DetailRow label="Published">{formatDate(media.publishedAt)}</DetailRow>}
                   {media.category && (
                     <DetailRow label="Category">
@@ -138,7 +138,7 @@ async function MediaDetail({ params }: Pick<PageProps<"/gallery/[slug]">, "param
                 </dl>
               </div>
               {media.tags.length > 0 && (
-                <div className="bg-navy-black p-[20px] md:p-[25px] lg:p-[30px]">
+                <div className="rounded-[20px] border border-white/5 bg-[#161616] p-6 md:p-7">
                   <h2 className="mb-[15px] border-b border-dashed border-white/20 pb-[5px] text-base !font-semibold md:mb-[20px] md:pb-[10px] md:text-lg lg:mb-[25px] lg:text-xl">
                     Tags
                   </h2>
@@ -147,7 +147,7 @@ async function MediaDetail({ params }: Pick<PageProps<"/gallery/[slug]">, "param
                       <li key={tag.slug}>
                         <Link
                           href={galleryHref({ tag: tag.slug })}
-                          className="inline-block rounded-[50px] border border-white/20 px-[12px] py-[4px] text-sm text-white transition-all duration-300 ease-in-out hover:border-primary hover:bg-primary"
+                          className="inline-block rounded-full border border-white/10 px-[12px] py-[4px] text-sm text-white transition-all duration-300 ease-in-out hover:border-primary hover:bg-primary hover:text-black"
                         >
                           {tag.name}
                         </Link>
@@ -166,10 +166,10 @@ async function MediaDetail({ params }: Pick<PageProps<"/gallery/[slug]">, "param
               <h2 id="related-heading" className={`mb-[25px] md:mb-[35px] lg:mb-[45px] ${sectionTitle}`}>
                 Related work
               </h2>
-              <ul className="grid grid-cols-1 gap-[25px] sm:grid-cols-2 lg:grid-cols-4">
+              <ul className="grid grid-cols-1 gap-x-5 gap-y-10 sm:grid-cols-2">
                 {related.map((item) => (
                   <li key={item.id}>
-                    <MediaCard media={item} sizes="(min-width: 1024px) 300px, (min-width: 640px) 45vw, 100vw" />
+                    <MediaCard media={item} sizes="(min-width: 1024px) 360px, (min-width: 640px) 45vw, 100vw" />
                   </li>
                 ))}
               </ul>
@@ -204,21 +204,21 @@ function MediaStage({ media }: { media: MediaDetailData }) {
         href={media.externalUrl ?? "#"}
         target="_blank"
         rel="noopener noreferrer"
-        className="group flex min-h-[22rem] flex-col justify-between bg-navy-black p-[30px] transition-all duration-300 ease-in-out hover:bg-primary md:min-h-[30rem] md:p-[50px]"
+        className="group flex min-h-[22rem] flex-col justify-between rounded-[20px] bg-[#161616] p-[30px] ring-1 ring-white/5 transition-all duration-300 ease-in-out hover:bg-primary md:min-h-[26rem] md:p-[44px]"
       >
-        <span className="inline-flex items-center gap-2 font-medium text-primary group-hover:text-white">
+        <span className="inline-flex items-center gap-2 font-medium text-primary group-hover:text-black">
           {media.providerLabel} <RiArrowRightUpLine className="size-5" aria-hidden="true" />
         </span>
-        <span className="max-w-3xl text-3xl font-bold text-white md:text-5xl">{media.caption ?? media.title}</span>
-        <span className="text-sm break-all text-[#a0a0a0] group-hover:text-white">{media.externalUrl}</span>
+        <span className="max-w-3xl text-3xl font-medium tracking-[-0.03em] text-white group-hover:text-black md:text-4xl">{media.caption ?? media.title}</span>
+        <span className="text-sm break-all text-white/45 group-hover:text-black/70">{media.externalUrl}</span>
       </a>
     );
   }
   if (media.displayImage) {
     return (
-      <figure className="flex justify-center bg-navy-black">
+      <figure className="flex justify-center overflow-hidden rounded-[20px] bg-[#161616] ring-1 ring-white/5">
         <div className="w-full" style={{ maxWidth: `min(100%, calc(80vh * ${media.displayImage.width / media.displayImage.height}))` }}>
-          <MediaImage image={media.displayImage} alt={media.altText} sizes="(min-width: 1280px) 860px, (min-width: 1024px) 66vw, 100vw" priority />
+          <MediaImage image={media.displayImage} alt={media.altText} sizes="(min-width: 1024px) 720px, 100vw" priority />
         </div>
       </figure>
     );
@@ -253,11 +253,11 @@ function Neighbours({ neighbours }: { neighbours: MediaDetailPage["neighbours"] 
       <div>
         {neighbours.previous && (
           <Link href={`/gallery/${neighbours.previous.slug}`} rel="prev" className="group inline-flex items-center gap-[15px]">
-            <span className="flex size-[45px] flex-none items-center justify-center rounded-full border border-white/30 transition-all duration-300 ease-in-out group-hover:border-primary group-hover:bg-primary md:size-[50px]">
+            <span className="flex size-[45px] flex-none items-center justify-center rounded-full border border-white/30 transition-all duration-300 ease-in-out group-hover:border-primary group-hover:bg-primary group-hover:text-black md:size-[50px]">
               <RiArrowLeftLine className="size-5" aria-hidden="true" />
             </span>
             <span>
-              <span className="block text-sm text-[#a0a0a0]">Newer</span>
+              <span className="block text-sm text-white/55">Newer</span>
               <span className="font-semibold text-white group-hover:text-primary md:text-lg">{neighbours.previous.title}</span>
             </span>
           </Link>
@@ -267,10 +267,10 @@ function Neighbours({ neighbours }: { neighbours: MediaDetailPage["neighbours"] 
         {neighbours.next && (
           <Link href={`/gallery/${neighbours.next.slug}`} rel="next" className="group inline-flex items-center gap-[15px]">
             <span>
-              <span className="block text-sm text-[#a0a0a0]">Older</span>
+              <span className="block text-sm text-white/55">Older</span>
               <span className="font-semibold text-white group-hover:text-primary md:text-lg">{neighbours.next.title}</span>
             </span>
-            <span className="flex size-[45px] flex-none items-center justify-center rounded-full border border-white/30 transition-all duration-300 ease-in-out group-hover:border-primary group-hover:bg-primary md:size-[50px]">
+            <span className="flex size-[45px] flex-none items-center justify-center rounded-full border border-white/30 transition-all duration-300 ease-in-out group-hover:border-primary group-hover:bg-primary group-hover:text-black md:size-[50px]">
               <RiArrowRightLine className="size-5" aria-hidden="true" />
             </span>
           </Link>
@@ -286,12 +286,12 @@ function typeLabel(media: MediaDetailData) {
 
 function DetailSkeleton() {
   return (
-    <div className="container pt-[130px] pb-24 opacity-20" aria-busy="true" aria-label="Loading">
+    <div className="pt-24 pb-24 opacity-20" aria-busy="true" aria-label="Loading">
       <Skeleton className="h-14 w-2/3" />
       <Skeleton className="mt-6 h-4 w-48" />
-      <div className="mt-16 grid gap-[25px] lg:grid-cols-3">
-        <Skeleton className="h-[50vh] lg:col-span-2" />
-        <Skeleton className="h-80" />
+      <div className="mt-16 grid gap-6">
+        <Skeleton className="h-[50vh]" />
+        <Skeleton className="h-60" />
       </div>
     </div>
   );

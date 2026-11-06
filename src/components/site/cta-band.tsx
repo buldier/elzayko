@@ -1,6 +1,8 @@
-import Image from "next/image";
+import { RiArrowRightUpLine, RiSendPlaneLine } from "@remixicon/react";
 import Link from "next/link";
 import type { ReactNode } from "react";
+import { SectionTag } from "@/components/isak/chrome";
+import { BlurText, Fade } from "@/components/isak/motion/reveal";
 
 type Props = {
   title: string;
@@ -8,20 +10,23 @@ type Props = {
   action: { href: string; label: string };
 };
 
-/** Centered call to action over the template's soundwave line, used before the footer. */
+/** Closing call to action before the footer. */
 export function CtaBand({ title, text, action }: Props) {
   return (
-    <section className="relative z-[1] py-[60px] text-center md:py-[80px] lg:py-[100px] xl:py-[120px]">
-      <div className="container">
-        <h2 className="mb-[15px] text-3xl leading-[1.1] !font-semibold md:mb-[20px] md:text-5xl lg:mb-[25px] lg:text-6xl xl:text-[64px]">{title}</h2>
-        <p className="mx-auto md:text-base lg:max-w-[880px] lg:text-lg">{text}</p>
-        <Link href={action.href} className="primary-btn mt-[10px] md:mt-[15px] lg:mt-[20px]">
+    <section className="border-t border-white/[0.06] py-16 md:py-24">
+      <SectionTag icon={<RiSendPlaneLine className="size-4" />}>Get in touch</SectionTag>
+      <BlurText className="!mb-5 max-w-[600px] text-[clamp(1.9rem,3.6vw,2.6rem)]">{title}</BlurText>
+      <Fade as="p" className="max-w-[560px] text-white/55">
+        {text}
+      </Fade>
+      <Fade className="mt-8">
+        <Link href={action.href} className="isak-pill">
+          <span className="isak-pill-icon">
+            <RiArrowRightUpLine className="size-4" aria-hidden="true" />
+          </span>
           {action.label}
         </Link>
-      </div>
-      <div className="pointer-events-none absolute top-1/2 right-0 left-0 -z-[1] mx-auto -translate-y-1/2 text-center" aria-hidden="true">
-        <Image src="/musfix/shape3.png" alt="" width={1920} height={370} className="w-full" />
-      </div>
+      </Fade>
     </section>
   );
 }

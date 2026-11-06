@@ -9,17 +9,16 @@ test("homepage presents the identity and featured work", async ({ page }) => {
 
 test("primary navigation reaches every public page", async ({ page, isMobile }) => {
   await page.goto("/");
-  const destinations = [
+  for (const { name, path } of [
     { name: "Gallery", path: "/gallery" },
-    { name: "About Us", path: "/about", group: "Pages" },
-    { name: "Contact Us", path: "/contact" },
-  ];
-  for (const { name, path, group } of destinations) {
+    { name: "About", path: "/about" },
+    { name: "Contact", path: "/contact" },
+  ]) {
     if (isMobile) await page.getByRole("button", { name: "Open menu" }).click();
-    const nav = page.getByRole("navigation", { name: "Primary" });
-    if (group && isMobile) await nav.getByRole("button", { name: `Show ${group} links` }).click();
-    else if (group) await nav.getByRole("link", { name: group, exact: true }).hover();
-    await nav.getByRole("link", { name, exact: true }).click();
+    await page
+      .getByRole("navigation", { name: "Primary" })
+      .getByRole("link", { name, exact: true })
+      .click();
     await expect(page).toHaveURL(new RegExp(`${path}$`));
     await expect(page.getByRole("heading", { level: 1 })).toBeVisible();
   }
@@ -43,7 +42,10 @@ test("gallery filters by type and search, and paginates server-side", async ({ p
 
 test("lightbox opens from quick view and navigates with the keyboard", async ({ page }) => {
   await page.goto("/gallery?type=image");
-  await page.getByRole("button", { name: /^Quick view:/ }).first().focus();
+  await page
+    .getByRole("button", { name: /^Quick view:/ })
+    .first()
+    .focus();
   await page.keyboard.press("Enter");
   const dialog = page.getByRole("dialog");
   await expect(dialog).toBeVisible();
@@ -57,7 +59,10 @@ test("lightbox opens from quick view and navigates with the keyboard", async ({ 
 test("media detail shows metadata, related work and canonical URL", async ({ page }) => {
   await page.goto("/gallery/low-tide-november");
   await expect(page.getByRole("heading", { level: 1, name: "Low Tide, November" })).toBeVisible();
-  await expect(page.locator('link[rel="canonical"]')).toHaveAttribute("href", /\/gallery\/low-tide-november$/);
+  await expect(page.locator('link[rel="canonical"]')).toHaveAttribute(
+    "href",
+    /\/gallery\/low-tide-november$/,
+  );
   await expect(page.getByRole("heading", { name: "Related work" })).toBeVisible();
 });
 
@@ -65,7 +70,9 @@ test("YouTube embeds only load after the visitor presses play", async ({ page })
   await page.goto("/gallery/big-buck-bunny-sample");
   await expect(page.locator("iframe")).toHaveCount(0);
   await page.getByRole("button", { name: /Play/ }).click();
-  await expect(page.locator('iframe[src^="https://www.youtube-nocookie.com/embed/aqz-KE-bpKQ"]')).toBeAttached();
+  await expect(
+    page.locator('iframe[src^="https://www.youtube-nocookie.com/embed/aqz-KE-bpKQ"]'),
+  ).toBeAttached();
 });
 
 test("unpublished and unknown items are not found", async ({ page }) => {

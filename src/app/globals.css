@@ -26,9 +26,9 @@
   --color-danger-tint: #f6dfda;
   --color-surface: #ffffff;
   --color-canvas: #f1ede6;
-  /* Public site (Musfix theme): black canvas, navy-black panels, a vivid pink accent. */
-  --color-primary: #fa325a;
-  --color-navy-black: #160f1a;
+  /* Public site (Isak-style): near-black canvas, raised charcoal panels, one signal-green accent. */
+  --color-primary: #00de51;
+  --color-navy-black: #161616;
   --color-body: #666666;
 
   --shadow-card: 0 1px 2px rgb(29 27 24 / 0.04), 0 1px 1px rgb(29 27 24 / 0.03);
@@ -36,7 +36,7 @@
 
   --font-display: var(--font-cormorant), "Cormorant Garamond", ui-serif, Georgia, serif;
   --font-sans: var(--font-hanken), "Hanken Grotesk", ui-sans-serif, system-ui, sans-serif;
-  --font-body: var(--font-poppins), "Poppins", sans-serif;
+  --font-body: var(--font-inter), "Inter", ui-sans-serif, system-ui, sans-serif;
 
   --text-display: clamp(3rem, 2rem + 5vw, 7.5rem);
   --text-display--line-height: 0.95;
@@ -185,35 +185,131 @@
   }
 }
 
-/* ─── Public theme (Musfix) ─────────────────────────────────────────────────
-   Applied by the public layout's `.theme-musfix` wrapper; the admin keeps the
-   paper/ink theme above. Mirrors the template's base styles and components. */
+/* ─── Public theme (Isak-style) ──────────────────────────────────────────────
+   Applied by the public layout's `.theme-isak` wrapper; the admin keeps the
+   paper/ink theme above. */
 @layer base {
-  body:has(.theme-musfix) {
-    background-color: var(--color-black);
+  body:has(.theme-isak) {
+    background-color: #0f0f0f;
   }
 
-  .theme-musfix {
-    @apply bg-black font-body text-sm text-white md:text-15 lg:text-base;
-    font-feature-settings: normal;
-    line-height: 1.5;
+  .theme-isak {
+    @apply font-body text-[15px] text-white/70 md:text-base;
+    font-feature-settings: "ss01", "cv11";
+    line-height: 1.6;
 
     & :where(h1, h2, h3, h4, h5, h6) {
-      @apply font-body font-bold text-white;
+      font-family: var(--font-sans);
+      font-weight: 500;
+      letter-spacing: -0.03em;
+      line-height: 1.12;
+      color: rgb(255 255 255 / 0.88);
     }
     & :where(p) {
-      @apply mb-[15px] leading-[1.5];
+      @apply mb-[15px];
     }
     & :where(p:last-child) {
       @apply mb-0;
     }
     & ::selection {
       background: var(--color-primary);
-      color: var(--color-white);
+      color: #000;
     }
     & :focus-visible {
       outline-color: var(--color-primary);
     }
+  }
+}
+
+@layer components {
+  /* Green pill with a separate round arrow badge in front ("↗ Let's talk"). */
+  .isak-pill {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    border-radius: 999px;
+    padding-right: 1.25rem;
+    font-size: 15px;
+    font-weight: 500;
+    color: #000;
+    white-space: nowrap;
+    background: linear-gradient(var(--color-primary), var(--color-primary)) no-repeat right /
+      calc(100% - 44px) 100%;
+    transition: background-size 0.45s var(--ease-out-soft);
+  }
+  .isak-pill-icon {
+    display: grid;
+    place-items: center;
+    width: 40px;
+    height: 40px;
+    margin-right: 18px;
+    border-radius: 999px;
+    background: var(--color-primary);
+    transition: transform 0.5s var(--ease-out-soft);
+  }
+  .isak-pill:hover {
+    background-size: 100% 100%;
+  }
+  .isak-pill:hover .isak-pill-icon {
+    transform: rotate(45deg);
+  }
+}
+
+/* Profile card steps aside while the work highlights are pinned (desktop). */
+@media (min-width: 1024px) {
+  html[data-work] [data-profile-card] {
+    transform: translateY(-20px);
+    opacity: 0;
+    visibility: hidden;
+  }
+}
+
+@media (scripting: enabled) {
+  /* Transparent until GSAP plays the entrance (components/isak/motion/reveal.tsx).
+     Opacity, not visibility: hidden content must stay focusable for keyboard users. */
+  .theme-isak [data-motion] {
+    opacity: 0;
+  }
+}
+@media (scripting: none) {
+  [data-preloader] {
+    display: none;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .theme-isak [data-motion] {
+    opacity: 1;
+  }
+}
+
+.split-line {
+  will-change: transform, filter, opacity;
+}
+
+/* Drifting smoke behind the content when no background film is available. */
+.isak-smoke {
+  animation: isak-drift 22s ease-in-out infinite alternate;
+}
+.isak-smoke-2 {
+  animation-duration: 28s;
+  animation-direction: alternate-reverse;
+}
+@keyframes isak-drift {
+  from {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+  to {
+    transform: translate3d(12vw, 8vh, 0) scale(1.15);
+  }
+}
+@keyframes caret {
+  50% {
+    opacity: 0;
+  }
+}
+@keyframes isak-marquee {
+  to {
+    transform: translateX(-50%);
   }
 }
 
@@ -223,30 +319,31 @@
 
 @layer components {
   .primary-btn {
-    @apply inline-flex cursor-pointer items-center justify-center gap-2 rounded-[5px] border border-primary bg-primary px-[25px] py-[11px] font-medium text-white transition-all duration-300 ease-in-out hover:bg-navy-black md:px-[30px] md:py-[13px];
+    @apply inline-flex cursor-pointer items-center justify-center gap-2 rounded-full border border-primary bg-primary px-[22px] py-[10px] text-[15px] font-medium text-black transition-all duration-300 ease-in-out hover:border-white hover:bg-white;
 
     &.with-border {
-      @apply bg-transparent hover:bg-navy-black hover:text-white;
+      @apply border-white/10 bg-white/[0.06] text-white hover:border-white/30 hover:bg-white/10;
     }
     &:disabled {
       @apply pointer-events-none opacity-60;
     }
   }
 
+  /* Underlined fields, as in the template's contact form. */
   .form-input {
-    @apply block h-[50px] w-full border border-[#1e1e1e] bg-navy-black px-[15px] text-sm text-white outline-none transition-all duration-300 ease-in-out placeholder:text-[#a0a0a0]/50 focus:border-primary md:h-[55px] md:px-[20px] md:text-15 lg:text-base;
+    @apply block h-[52px] w-full border-0 border-b border-white/10 bg-transparent px-0 text-[15px] text-white transition-colors duration-300 ease-in-out outline-none placeholder:text-white/30 focus:border-primary md:text-base;
 
     &[aria-invalid="true"] {
-      @apply border-primary;
+      @apply border-[#ff5c5c];
     }
   }
   textarea.form-input {
-    @apply h-[150px] pt-[15px] lg:pt-[20px];
+    @apply h-[140px] resize-none pt-[14px];
   }
 
   .form-select {
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='%23ff0000' viewBox='0 0 16 16'%3E%3Cpath d='M4.646 6.646a.5.5 0 0 1 .708 0L8 9.293l2.646-2.647a.5.5 0 0 1 .708.708l-3 3a.5.5 0 0 1-.708 0l-3-3a.5.5 0 0 1 0-.708z'/%3E%3C/svg%3E");
-    @apply block h-[50px] w-full cursor-pointer appearance-none border border-[#1e1e1e] bg-navy-black bg-[length:24px] bg-[right_12px_center] bg-no-repeat px-[15px] text-sm text-white outline-none transition-all duration-300 ease-in-out focus:border-primary md:h-[55px] md:px-[20px] md:text-15 lg:text-base;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='%2300de51' viewBox='0 0 16 16'%3E%3Cpath d='M4.646 6.646a.5.5 0 0 1 .708 0L8 9.293l2.646-2.647a.5.5 0 0 1 .708.708l-3 3a.5.5 0 0 1-.708 0l-3-3a.5.5 0 0 1 0-.708z'/%3E%3C/svg%3E");
+    @apply block h-[48px] w-full cursor-pointer appearance-none rounded-full border border-white/10 bg-[#161616] bg-[length:24px] bg-[right_12px_center] bg-no-repeat px-[15px] text-sm text-white transition-all duration-300 ease-in-out outline-none focus:border-primary md:h-[55px] md:px-[20px] md:text-15 lg:text-base;
   }
 
   .marquee {

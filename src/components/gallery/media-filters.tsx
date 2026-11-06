@@ -60,8 +60,8 @@ export function MediaFilters({ filters, categories, collections }: Props) {
         </ul>
       </nav>
 
-      <div className="grid gap-[15px] md:grid-cols-[1fr_14rem_14rem] md:gap-[20px]">
-        <Form action="/gallery" scroll={false} role="search" className="relative">
+      <div className="grid gap-3 sm:grid-cols-2">
+        <Form action="/gallery" scroll={false} role="search" className="relative sm:col-span-2">
           {filters.type !== "all" && <input type="hidden" name="type" value={filters.type} />}
           {filters.category && <input type="hidden" name="category" value={filters.category} />}
           {filters.collection && <input type="hidden" name="collection" value={filters.collection} />}
@@ -76,9 +76,9 @@ export function MediaFilters({ filters, categories, collections }: Props) {
             defaultValue={filters.q}
             placeholder="Search titles, captions, tags…"
             maxLength={100}
-            className="form-input pr-[110px] pl-[45px] md:pl-[50px]"
+            className="form-input !h-[48px] rounded-full !border !border-white/10 !bg-[#161616] pr-[110px] !pl-[45px] focus:!border-primary md:!pl-[50px]"
           />
-          <button type="submit" className="primary-btn absolute top-[5px] right-[5px] bottom-[5px] !py-0">
+          <button type="submit" className="primary-btn absolute top-[4px] right-[4px] bottom-[4px] !py-0">
             Search
           </button>
         </Form>
@@ -130,7 +130,7 @@ function FilterChip({ label, href }: { label: string; href: string }) {
     <Link
       href={href}
       scroll={false}
-      className="inline-flex items-center gap-[5px] rounded-[50px] border border-primary bg-white/10 px-[12px] py-[5px] text-sm text-white hover:bg-primary"
+      className="inline-flex items-center gap-[5px] rounded-full border border-primary/60 bg-white/[0.06] px-3 py-1 text-sm text-white hover:bg-primary hover:text-black"
       aria-label={`Remove filter ${label}`}
     >
       {label}

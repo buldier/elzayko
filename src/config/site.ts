@@ -7,6 +7,10 @@ export const siteConfig = {
   defaultDescription:
     "Elzayko — photography, moving image and quiet observations. A personal portfolio and public gallery.",
   locale: "en_GB",
+  /** Words cycled by the typing greeting on the profile card ("Hey, I'm …"). */
+  heroRoles: ["a photographer", "a filmmaker", "a quiet observer"],
+  /** Status line on the profile card. */
+  availability: "Available for commissions",
 } as const;
 
 export const SOCIAL_PLATFORMS = [

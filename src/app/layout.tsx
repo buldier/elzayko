@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Cormorant_Garamond, Hanken_Grotesk, Poppins } from "next/font/google";
+import { Cormorant_Garamond, Hanken_Grotesk, Inter, Poppins } from "next/font/google";
 import { siteConfig } from "@/config/site";
 import "./globals.css";
 
@@ -17,6 +17,12 @@ const sans = Hanken_Grotesk({
   display: "swap",
 });
 
+const inter = Inter({
+  variable: "--font-inter",
+  subsets: ["latin"],
+  display: "swap",
+});
+
 const body = Poppins({
   variable: "--font-poppins",
   subsets: ["latin"],
@@ -26,7 +32,10 @@ const body = Poppins({
 
 export const metadata: Metadata = {
   metadataBase: new URL(process.env.SITE_URL ?? "http://localhost:3000"),
-  title: { default: `${siteConfig.name} — Photography & moving image`, template: `%s — ${siteConfig.name}` },
+  title: {
+    default: `${siteConfig.name} — Photography & moving image`,
+    template: `%s — ${siteConfig.name}`,
+  },
   description: siteConfig.defaultDescription,
   applicationName: siteConfig.name,
   openGraph: {
@@ -46,7 +55,10 @@ export const viewport: Viewport = {
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
-    <html lang="en" className={`${display.variable} ${sans.variable} ${body.variable} antialiased`}>
+    <html
+      lang="en"
+      className={`${display.variable} ${sans.variable} ${body.variable} ${inter.variable} antialiased`}
+    >
       <body className="flex min-h-dvh flex-col">
         <a
           href="#main"
