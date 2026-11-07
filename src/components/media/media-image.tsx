@@ -15,6 +15,7 @@ type Props = {
 
 export function MediaImage({ image, alt, sizes, priority, mode = "natural", className, quality = 80 }: Props) {
   const placeholder = image.blurDataUrl ? ("blur" as const) : ("empty" as const);
+  // Crops favour the upper part of the frame so portrait photos keep faces in view.
   if (mode === "fill") {
     return (
       <Image
@@ -26,7 +27,7 @@ export function MediaImage({ image, alt, sizes, priority, mode = "natural", clas
         quality={quality}
         placeholder={placeholder}
         blurDataURL={image.blurDataUrl ?? undefined}
-        className={cn("object-cover", className)}
+        className={cn("object-cover object-[50%_22%]", className)}
       />
     );
   }
