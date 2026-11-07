@@ -76,7 +76,7 @@ export function MediaFilters({ filters, categories, collections }: Props) {
             defaultValue={filters.q}
             placeholder="Search titles, captions, tags…"
             maxLength={100}
-            className="form-input !h-[48px] rounded-full !border !border-white/10 !bg-[#161616] pr-[110px] !pl-[45px] focus:!border-primary md:!pl-[50px]"
+            className="form-input !h-[48px] rounded-lg !border !border-white/10 !bg-graphite pr-[110px] !pl-[45px] focus:!border-primary md:!pl-[50px]"
           />
           <button type="submit" className="primary-btn absolute top-[4px] right-[4px] bottom-[4px] !py-0">
             Search
@@ -130,7 +130,7 @@ function FilterChip({ label, href }: { label: string; href: string }) {
     <Link
       href={href}
       scroll={false}
-      className="inline-flex items-center gap-[5px] rounded-full border border-primary/60 bg-white/[0.06] px-3 py-1 text-sm text-white hover:bg-primary hover:text-black"
+      className="inline-flex items-center gap-[5px] rounded-md border border-primary/60 bg-white/[0.06] px-3 py-1 text-sm text-white hover:bg-primary hover:text-white"
       aria-label={`Remove filter ${label}`}
     >
       {label}

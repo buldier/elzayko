@@ -250,7 +250,7 @@ export default async function HomePage() {
                   href={galleryHref({ category: category.slug })}
                   className="group flex items-center gap-4"
                 >
-                  <span className="grid size-12 flex-none place-items-center rounded-full bg-[#1c1c1c] font-display text-xl text-white/85 shadow-[inset_0_1px_0_rgb(255_255_255/0.06)] transition-colors group-hover:text-primary">
+                  <span className="grid size-12 flex-none place-items-center rounded-lg bg-graphite-soft font-display text-xl text-white/85 shadow-[inset_0_1px_0_rgb(255_255_255/0.06)] transition-colors group-hover:text-primary">
                     {category.name.charAt(0)}
                   </span>
                   <span>
@@ -320,7 +320,7 @@ function Counter({ value, label }: { value: number; label: string }) {
     <Fade>
       <p className="!mb-1 flex items-start text-[clamp(2.75rem,5vw,3.75rem)] leading-none font-light tracking-[-0.05em] text-white/80">
         <CountUp to={value} />
-        <span className="text-[0.7em]">+</span>
+        <span className="text-[0.7em] text-signal-yellow">+</span>
       </p>
       <p className="!mb-0 text-sm text-white/55">{label}</p>
     </Fade>
@@ -334,7 +334,7 @@ function Marquee({ items }: { items: string[] }) {
       {items.map((item) => (
         <li
           key={item}
-          className="text-2xl font-medium tracking-[-0.03em] whitespace-nowrap text-white/40"
+          className="text-2xl font-medium tracking-[-0.03em] whitespace-nowrap text-white/40 transition-colors hover:text-signal-yellow"
         >
           {item}
         </li>

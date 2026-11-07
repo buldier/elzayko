@@ -45,7 +45,7 @@ export function CollectionAccordion({ items }: { items: AccordionCollection[] })
                 >
                   {item.title}
                 </span>
-                <span className="grid size-8 flex-none place-items-center rounded-full border border-white/10 text-white/70 transition-colors group-hover:border-primary group-hover:text-primary">
+                <span className="grid size-8 flex-none place-items-center rounded-lg border border-white/10 text-white/70 transition-colors group-hover:border-primary group-hover:text-primary">
                   {isOpen ? (
                     <RiSubtractLine className="size-4" aria-hidden="true" />
                   ) : (
@@ -70,7 +70,7 @@ export function CollectionAccordion({ items }: { items: AccordionCollection[] })
                       {item.images.slice(0, 3).map((image, n) => (
                         <div
                           key={`${image.src}-${n}`}
-                          className="absolute top-0 h-full w-[60%] overflow-hidden rounded-[14px] border-[3px] border-[#1c1c1c] shadow-[0_20px_40px_-15px_rgb(0_0_0/0.9)]"
+                          className="absolute top-0 h-full w-[60%] overflow-hidden rounded-[14px] border-[3px] border-graphite-soft shadow-[0_20px_40px_-15px_rgb(0_0_0/0.9)]"
                           style={{ left: `${n * 20}%`, zIndex: n + 1 }}
                         >
                           <MediaImage image={image} alt={image.alt} sizes="280px" mode="fill" />
@@ -79,15 +79,15 @@ export function CollectionAccordion({ items }: { items: AccordionCollection[] })
                     </div>
                   )}
                   <ul className="mb-4 flex flex-wrap gap-2">
-                    <li className="rounded-full bg-white/[0.06] px-3 py-1 text-sm font-medium text-white/75">
+                    <li className="rounded-md bg-white/[0.06] px-3 py-1 text-sm font-medium text-white/75">
                       {item.count} {item.count === 1 ? "work" : "works"}
                     </li>
                     {item.featured && (
-                      <li className="rounded-full bg-white/[0.06] px-3 py-1 text-sm font-medium text-white/75">
+                      <li className="rounded-md border border-signal-red/40 bg-signal-red/10 px-3 py-1 text-sm font-medium text-signal-red">
                         Featured series
                       </li>
                     )}
-                    <li className="rounded-full bg-white/[0.06] px-3 py-1 text-sm font-medium text-white/75">
+                    <li className="rounded-md bg-white/[0.06] px-3 py-1 text-sm font-medium text-white/75">
                       Collection
                     </li>
                   </ul>

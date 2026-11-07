@@ -46,7 +46,7 @@ export function MediaCard({ media, sizes = DEFAULT_SIZES, priority, className, s
         )}
 
         {media.mediaType === "VIDEO" && (
-          <span className="absolute bottom-3 left-3 inline-flex items-center gap-[5px] rounded-full bg-primary px-3 py-1 text-sm font-medium text-black">
+          <span className="absolute bottom-3 left-3 inline-flex items-center gap-[5px] rounded-md bg-primary px-3 py-1 text-sm font-medium text-white">
             <RiPlayFill className="size-4" aria-hidden="true" />
             {media.duration ? formatDuration(media.duration) : (media.providerLabel ?? "Film")}
           </span>

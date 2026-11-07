@@ -11,7 +11,10 @@ export function Journey({ highlights }: { highlights: Highlight[] }) {
         aria-hidden="true"
         className="absolute top-0 bottom-0 left-[6px] w-[2px] bg-white/[0.06] sm:left-[126px]"
       >
-        <span data-progress-line className="absolute inset-x-0 top-0 h-full bg-primary" />
+        <span
+          data-progress-line
+          className="absolute inset-x-0 top-0 h-full bg-gradient-to-b from-primary via-signal-red to-signal-yellow"
+        />
       </span>
       <ol>
         {highlights.map((highlight, i) => (
@@ -25,10 +28,10 @@ export function Journey({ highlights }: { highlights: Highlight[] }) {
             </span>
             <span
               aria-hidden="true"
-              className="absolute top-1.5 left-0 size-[14px] rounded-full bg-primary shadow-[0_0_0_4px_rgb(0_222_81/0.12)] sm:static sm:mt-1.5 sm:mr-12 sm:flex-none"
+              className="absolute top-1.5 left-0 size-[14px] rounded-full bg-signal-red shadow-[0_0_0_4px_rgb(255_59_59/0.15)] sm:static sm:mt-1.5 sm:mr-12 sm:flex-none"
             />
             <span className="block w-full sm:w-auto">
-              <span className="mb-5 grid size-9 place-items-center rounded-full bg-white/[0.06] font-display text-lg text-white/80">
+              <span className="mb-5 grid size-9 place-items-center rounded-lg bg-white/[0.06] font-display text-lg text-white/80">
                 {String(i + 1).padStart(2, "0")}
               </span>
               <span className="mb-2 block text-lg font-medium text-white/60 transition-colors duration-300 group-data-[active]:text-white/90">

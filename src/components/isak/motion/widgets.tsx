@@ -140,7 +140,7 @@ export function ProgressBar({ value, label }: { value: number; label: string }) 
   });
   return (
     <div
-      className="relative h-10 w-full rounded-full border border-white/5 bg-white/[0.03] p-1 shadow-[inset_0_1px_8px_rgb(0_0_0/0.6)]"
+      className="relative h-10 w-full rounded-lg border border-white/5 bg-white/[0.03] p-1 shadow-[inset_0_1px_8px_rgb(0_0_0/0.6)]"
       role="meter"
       aria-valuemin={0}
       aria-valuemax={100}
@@ -149,10 +149,10 @@ export function ProgressBar({ value, label }: { value: number; label: string }) 
     >
       <div
         ref={bar}
-        className="flex h-full min-w-[68px] items-center justify-end rounded-full bg-gradient-to-r from-white/[0.02] to-white/[0.12] pr-3 shadow-[0_1px_0_rgb(255_255_255/0.08)_inset]"
+        className="flex h-full min-w-[68px] items-center justify-end rounded-lg bg-gradient-to-r from-primary/10 to-primary/70 pr-3 shadow-[0_1px_0_rgb(255_255_255/0.08)_inset]"
         style={{ width: `${value}%` }}
       >
-        <span className="rounded-full bg-[#1f1f1f] px-2.5 py-0.5 font-mono text-[11px] whitespace-nowrap text-white/80">
+        <span className="rounded-md bg-graphite-soft px-2.5 py-0.5 font-mono text-[11px] whitespace-nowrap text-white/80">
           {value} %
         </span>
       </div>

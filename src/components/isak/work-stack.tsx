@@ -83,7 +83,7 @@ export function WorkStack({ items }: { items: WorkItem[] }) {
         >
           <Link
             href={item.href}
-            className="group block overflow-hidden rounded-[20px] bg-[#161616] p-1.5 ring-1 ring-white/5"
+            className="group block overflow-hidden rounded-[20px] bg-graphite p-1.5 ring-1 ring-white/5"
           >
             <span className="relative block aspect-[700/427] overflow-hidden rounded-[15px]">
               <MediaImage
@@ -143,13 +143,13 @@ function WorkPanel({
         visible ? "visible translate-y-0 opacity-100" : "invisible -translate-y-10 opacity-0",
       )}
     >
-      <div className="relative h-[calc(100vh-48px)] max-h-[860px] w-full rounded-[24px] bg-[#161616] p-1.5 shadow-[0_30px_80px_-30px_rgb(0_0_0/0.9)]">
+      <div className="relative h-[calc(100vh-48px)] max-h-[860px] w-full rounded-[24px] bg-graphite p-1.5 shadow-[0_30px_80px_-30px_rgb(0_0_0/0.9)]">
         <div className="relative h-full overflow-hidden rounded-[18px]">
           <MediaImage image={item.image} alt="" sizes="480px" mode="fill" />
           <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-black/40 to-black/90" />
           <div className="absolute inset-0 flex flex-col justify-between p-8 xl:p-10">
             <div>
-              <span className="mb-6 grid size-10 place-items-center rounded-full bg-white/10 font-display text-lg text-white backdrop-blur">
+              <span className="mb-6 grid size-10 place-items-center rounded-lg bg-signal-red font-display text-lg text-white">
                 {String(index + 1).padStart(2, "0")}
               </span>
               <h3 className="!mb-3 text-4xl !font-medium tracking-[-0.02em] !text-white/80">
@@ -171,7 +171,7 @@ function WorkPanel({
                   {item.tags.map((tag) => (
                     <span
                       key={tag}
-                      className="rounded-full bg-white/10 px-3 py-1 text-sm font-medium text-white/75 backdrop-blur"
+                      className="rounded-md bg-white/10 px-3 py-1 text-sm font-medium text-white/75 backdrop-blur"
                     >
                       {tag}
                     </span>

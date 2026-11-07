@@ -26,12 +26,12 @@ export async function PageBanner({ title, crumbs, image, featuredIndex = 0, intr
     <header className="pt-12 pb-6 lg:pt-24">
       <Fade className="mb-6">
         <nav aria-label="Breadcrumb">
-          <ol className="inline-flex flex-wrap items-center gap-1 rounded-full border border-white/5 bg-white/[0.06] px-3 py-1 text-xs font-medium tracking-wide text-white/70 uppercase">
+          <ol className="inline-flex flex-wrap items-center gap-1 rounded-md border border-white/5 bg-white/[0.06] px-3 py-1 text-xs font-medium tracking-wide text-white/70 uppercase">
             {[{ label: "Home", href: "/" }, ...crumbs].map((crumb, index) => (
               <Fragment key={`${crumb.label}-${index}`}>
                 {index > 0 && (
                   <li aria-hidden="true">
-                    <RiArrowRightSLine className="size-3.5 text-primary" />
+                    <RiArrowRightSLine className="size-3.5 text-signal-yellow" />
                   </li>
                 )}
                 <li>

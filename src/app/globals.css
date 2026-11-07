@@ -26,9 +26,16 @@
   --color-danger-tint: #f6dfda;
   --color-surface: #ffffff;
   --color-canvas: #f1ede6;
-  /* Public site (Isak-style): near-black canvas, raised charcoal panels, one signal-green accent. */
-  --color-primary: #00de51;
-  --color-navy-black: #161616;
+  /* Public site (Elzayko palette): black canvas, dark-grey panels, blue lead accent,
+     red and yellow as supporting signals. */
+  --color-primary: #2563ff;
+  --color-primary-deep: #1747d1;
+  --color-signal-red: #ff3b3b;
+  --color-signal-yellow: #ffc83d;
+  --color-graphite: #1b1c20;
+  --color-graphite-soft: #24252b;
+  --color-void: #0a0a0b;
+  --color-navy-black: #1b1c20;
   --color-body: #666666;
 
   --shadow-card: 0 1px 2px rgb(29 27 24 / 0.04), 0 1px 1px rgb(29 27 24 / 0.03);
@@ -190,7 +197,7 @@
    paper/ink theme above. */
 @layer base {
   body:has(.theme-isak) {
-    background-color: #0f0f0f;
+    background-color: var(--color-void);
   }
 
   .theme-isak {
@@ -212,7 +219,7 @@
       @apply mb-0;
     }
     & ::selection {
-      background: var(--color-primary);
+      background: var(--color-signal-yellow);
       color: #000;
     }
     & :focus-visible {
@@ -227,11 +234,11 @@
     position: relative;
     display: inline-flex;
     align-items: center;
-    border-radius: 999px;
+    border-radius: 8px;
     padding-right: 1.25rem;
     font-size: 15px;
     font-weight: 500;
-    color: #000;
+    color: #fff;
     white-space: nowrap;
     background: linear-gradient(var(--color-primary), var(--color-primary)) no-repeat right /
       calc(100% - 44px) 100%;
@@ -243,12 +250,15 @@
     width: 40px;
     height: 40px;
     margin-right: 18px;
-    border-radius: 999px;
+    border-radius: 8px;
     background: var(--color-primary);
     transition: transform 0.5s var(--ease-out-soft);
   }
   .isak-pill:hover {
     background-size: 100% 100%;
+  }
+  .isak-pill:hover .isak-pill-icon {
+    background: var(--color-primary-deep);
   }
   .isak-pill:hover .isak-pill-icon {
     transform: rotate(45deg);
@@ -319,10 +329,10 @@
 
 @layer components {
   .primary-btn {
-    @apply inline-flex cursor-pointer items-center justify-center gap-2 rounded-full border border-primary bg-primary px-[22px] py-[10px] text-[15px] font-medium text-black transition-all duration-300 ease-in-out hover:border-white hover:bg-white;
+    @apply inline-flex cursor-pointer items-center justify-center gap-2 rounded-lg border border-primary bg-primary px-[22px] py-[10px] text-[15px] font-medium text-white transition-all duration-300 ease-in-out hover:border-primary-deep hover:bg-primary-deep;
 
     &.with-border {
-      @apply border-white/10 bg-white/[0.06] text-white hover:border-white/30 hover:bg-white/10;
+      @apply border-white/10 bg-graphite text-white hover:border-signal-yellow/60 hover:bg-graphite-soft;
     }
     &:disabled {
       @apply pointer-events-none opacity-60;
@@ -334,7 +344,7 @@
     @apply block h-[52px] w-full border-0 border-b border-white/10 bg-transparent px-0 text-[15px] text-white transition-colors duration-300 ease-in-out outline-none placeholder:text-white/30 focus:border-primary md:text-base;
 
     &[aria-invalid="true"] {
-      @apply border-[#ff5c5c];
+      @apply border-signal-red;
     }
   }
   textarea.form-input {
@@ -342,8 +352,8 @@
   }
 
   .form-select {
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='%2300de51' viewBox='0 0 16 16'%3E%3Cpath d='M4.646 6.646a.5.5 0 0 1 .708 0L8 9.293l2.646-2.647a.5.5 0 0 1 .708.708l-3 3a.5.5 0 0 1-.708 0l-3-3a.5.5 0 0 1 0-.708z'/%3E%3C/svg%3E");
-    @apply block h-[48px] w-full cursor-pointer appearance-none rounded-full border border-white/10 bg-[#161616] bg-[length:24px] bg-[right_12px_center] bg-no-repeat px-[15px] text-sm text-white transition-all duration-300 ease-in-out outline-none focus:border-primary md:h-[55px] md:px-[20px] md:text-15 lg:text-base;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='%232563ff' viewBox='0 0 16 16'%3E%3Cpath d='M4.646 6.646a.5.5 0 0 1 .708 0L8 9.293l2.646-2.647a.5.5 0 0 1 .708.708l-3 3a.5.5 0 0 1-.708 0l-3-3a.5.5 0 0 1 0-.708z'/%3E%3C/svg%3E");
+    @apply block h-[48px] w-full cursor-pointer appearance-none rounded-lg border border-white/10 bg-graphite bg-[length:24px] bg-[right_12px_center] bg-no-repeat px-[15px] text-sm text-white transition-all duration-300 ease-in-out outline-none focus:border-primary md:h-[55px] md:px-[20px] md:text-15 lg:text-base;
   }
 
   .marquee {

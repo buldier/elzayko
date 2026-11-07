@@ -102,7 +102,7 @@ export default async function AboutPage() {
               {content.interests.map((interest) => (
                 <li
                   key={interest}
-                  className="rounded-full bg-white/[0.06] px-4 py-1.5 text-sm font-medium text-white/75"
+                  className="rounded-md bg-white/[0.06] px-4 py-1.5 text-sm font-medium text-white/75"
                 >
                   {interest}
                 </li>
@@ -140,7 +140,7 @@ function Stat({ value, label }: { value: number; label: string }) {
     <Fade>
       <p className="!mb-1 flex items-start text-[clamp(2.5rem,5vw,3.5rem)] leading-none font-light tracking-[-0.05em] text-white/80">
         <CountUp to={value} />
-        <span className="text-[0.7em]">+</span>
+        <span className="text-[0.7em] text-signal-yellow">+</span>
       </p>
       <p className="!mb-0 text-sm text-white/55">{label}</p>
     </Fade>

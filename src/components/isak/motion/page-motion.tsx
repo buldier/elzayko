@@ -88,9 +88,9 @@ export function Preloader() {
       ref={ref}
       data-preloader
       aria-hidden="true"
-      className="fixed inset-0 z-[300] grid place-items-center bg-[#0f0f0f]"
+      className="fixed inset-0 z-[300] grid place-items-center bg-void"
     >
-      <span className="size-12 animate-spin rounded-full border-2 border-white/10 border-t-primary" />
+      <span className="size-12 animate-spin rounded-full border-2 border-white/10 border-t-signal-red border-r-primary" />
     </div>
   );
 }

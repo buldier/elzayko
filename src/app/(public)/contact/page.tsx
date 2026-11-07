@@ -63,7 +63,7 @@ export default async function ContactPage() {
                 target="_blank"
                 rel="noopener noreferrer me"
                 aria-label={SOCIAL_LABELS[link.platform]}
-                className="grid size-10 place-items-center rounded-full bg-white/[0.06] text-white/80 transition-colors hover:bg-primary hover:text-black"
+                className="grid size-10 place-items-center rounded-lg bg-white/[0.06] text-white/80 transition-colors hover:bg-primary hover:text-white"
               >
                 <SocialIcon platform={link.platform} className="size-4" />
               </a>
@@ -98,10 +98,10 @@ function ContactItem({
   return (
     <Fade
       as="li"
-      className="flex items-center gap-4 rounded-[20px] border border-white/5 bg-[#161616] p-5"
+      className="flex items-center gap-4 rounded-[20px] border border-white/5 bg-graphite p-5"
     >
       <span
-        className="grid size-11 flex-none place-items-center rounded-full bg-white/[0.06] text-primary"
+        className="grid size-11 flex-none place-items-center rounded-lg bg-white/[0.06] text-primary"
         aria-hidden="true"
       >
         {icon}

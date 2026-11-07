@@ -15,7 +15,7 @@ export function NotesSlider({ notes }: { notes: Note[] }) {
 
   return (
     <div className="relative pl-0 sm:pl-6">
-      <RiDoubleQuotesL className="mb-4 size-7 text-primary" aria-hidden="true" />
+      <RiDoubleQuotesL className="mb-4 size-7 text-signal-yellow" aria-hidden="true" />
       <div className="grid" aria-live="polite">
         {notes.map((note, i) => (
           <figure
@@ -53,7 +53,7 @@ export function NotesSlider({ notes }: { notes: Note[] }) {
             type="button"
             onClick={() => go(-1)}
             aria-label="Previous note"
-            className="grid size-9 place-items-center rounded-full bg-white/[0.06] text-white/70 hover:text-primary"
+            className="grid size-9 place-items-center rounded-lg bg-white/[0.06] text-white/70 hover:text-primary"
           >
             <RiArrowLeftSLine className="size-5" />
           </button>
@@ -61,7 +61,7 @@ export function NotesSlider({ notes }: { notes: Note[] }) {
             type="button"
             onClick={() => go(1)}
             aria-label="Next note"
-            className="grid size-9 place-items-center rounded-full bg-white/[0.06] text-white/70 hover:text-primary"
+            className="grid size-9 place-items-center rounded-lg bg-white/[0.06] text-white/70 hover:text-primary"
           >
             <RiArrowRightSLine className="size-5" />
           </button>

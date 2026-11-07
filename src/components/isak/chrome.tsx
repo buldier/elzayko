@@ -10,7 +10,7 @@ export function Backdrop({ videoSrc, poster }: { videoSrc: string | null; poster
   return (
     <div
       aria-hidden="true"
-      className="pointer-events-none fixed inset-0 -z-10 overflow-hidden bg-[#0f0f0f]"
+      className="pointer-events-none fixed inset-0 -z-10 overflow-hidden bg-void"
     >
       {videoSrc ? (
         <video
@@ -25,11 +25,11 @@ export function Backdrop({ videoSrc, poster }: { videoSrc: string | null; poster
         />
       ) : (
         <>
-          <div className="isak-smoke absolute -top-1/4 -left-1/4 size-[80vmax] rounded-full bg-[radial-gradient(circle,rgb(255_255_255/0.07),transparent_60%)] blur-3xl" />
-          <div className="isak-smoke isak-smoke-2 absolute -right-1/4 -bottom-1/3 size-[90vmax] rounded-full bg-[radial-gradient(circle,rgb(255_255_255/0.05),transparent_60%)] blur-3xl" />
+          <div className="isak-smoke absolute -top-1/4 -left-1/4 size-[80vmax] rounded-full bg-[radial-gradient(circle,rgb(37_99_255/0.16),transparent_60%)] blur-3xl" />
+          <div className="isak-smoke isak-smoke-2 absolute -right-1/4 -bottom-1/3 size-[90vmax] rounded-full bg-[radial-gradient(circle,rgb(255_59_59/0.09),transparent_60%)] blur-3xl" />
         </>
       )}
-      <div className="absolute inset-0 bg-gradient-to-b from-[#0f0f0f]/40 via-[#0f0f0f]/60 to-[#0f0f0f]/90" />
+      <div className="absolute inset-0 bg-gradient-to-b from-void/40 via-void/60 to-void/90" />
     </div>
   );
 }
@@ -47,12 +47,12 @@ export function SectionTag({
   return (
     <Fade
       className={cn(
-        "mb-6 inline-flex items-center gap-1.5 rounded-full border border-white/5 bg-white/[0.06] px-2.5 py-1 text-xs font-medium tracking-wide text-white/80 uppercase",
+        "mb-6 inline-flex items-center gap-1.5 rounded-md border border-white/5 bg-white/[0.06] px-2.5 py-1 text-xs font-medium tracking-wide text-white/80 uppercase",
         className,
       )}
     >
       {icon && (
-        <span className="text-primary" aria-hidden="true">
+        <span className="text-signal-yellow" aria-hidden="true">
           {icon}
         </span>
       )}

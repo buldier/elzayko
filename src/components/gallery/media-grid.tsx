@@ -34,7 +34,7 @@ export function MediaGrid({ items, priorityCount = 3, className }: Props) {
                 <button
                   type="button"
                   onClick={() => setLightboxIndex(imageIndex)}
-                  className="absolute top-3 right-3 inline-flex size-10 items-center justify-center rounded-full bg-black/50 text-white opacity-100 backdrop-blur-md transition-all duration-300 ease-in-out hover:bg-primary hover:text-black focus-visible:opacity-100 sm:opacity-0 sm:[li:hover_&]:opacity-100"
+                  className="absolute top-3 right-3 inline-flex size-10 items-center justify-center rounded-lg bg-black/50 text-white opacity-100 backdrop-blur-md transition-all duration-300 ease-in-out hover:bg-primary hover:text-white focus-visible:opacity-100 sm:opacity-0 sm:[li:hover_&]:opacity-100"
                   aria-label={`Quick view: ${item.title}`}
                 >
                   <RiFullscreenLine className="size-5" aria-hidden="true" />

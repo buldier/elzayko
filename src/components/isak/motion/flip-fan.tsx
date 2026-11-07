@@ -77,7 +77,7 @@ export function FlipFan({ items }: { items: FanItem[] }) {
           href={item.href}
           data-fan-card
           aria-label={item.title}
-          className="absolute top-0 left-0 block size-[150px] opacity-0 overflow-hidden rounded-[6px] shadow-[0_24px_60px_-12px_rgb(0_0_0/0.8)] ring-1 ring-white/10"
+          className="absolute top-0 left-0 block size-[150px] overflow-hidden rounded-[6px] opacity-0 shadow-[0_24px_60px_-12px_rgb(0_0_0/0.8)] ring-1 ring-white/10"
           style={{ zIndex: i + 1 }}
         >
           <MediaImage image={item.image} alt={item.alt} sizes="150px" mode="fill" />

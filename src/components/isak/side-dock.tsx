@@ -93,7 +93,7 @@ export function SideDock() {
   return (
     <div className="fixed top-1/2 right-4 z-50 hidden -translate-y-1/2 flex-col items-center gap-3 min-[1600px]:right-12 lg:flex">
       <nav aria-label="Primary">
-        <ul className="flex flex-col items-center gap-1 rounded-full border border-white/5 bg-[#161616]/90 p-1.5 shadow-[0_10px_40px_-10px_rgb(0_0_0/0.8)] backdrop-blur-md">
+        <ul className="flex flex-col items-center gap-1 rounded-lg border border-white/5 bg-graphite/90 p-1.5 shadow-[0_10px_40px_-10px_rgb(0_0_0/0.8)] backdrop-blur-md">
           {dockNavigation.map((item, i) => {
             const Icon = ICONS[item.icon];
             const isActive = active === item.href;
@@ -108,14 +108,14 @@ export function SideDock() {
                   }
                   onClick={(event) => onSectionClick(event, item.href, pathname)}
                   className={cn(
-                    "group/dock relative grid size-9 place-items-center rounded-full transition-colors duration-300",
+                    "group/dock relative grid size-9 place-items-center rounded-lg transition-colors duration-300",
                     isActive
                       ? "bg-white/10 text-primary"
                       : "text-white/55 hover:bg-white/5 hover:text-white",
                   )}
                 >
                   <Icon className="size-[18px]" aria-hidden="true" />
-                  <span className="pointer-events-none absolute top-1/2 right-[calc(100%+12px)] translate-x-2 -translate-y-1/2 rounded-md bg-white px-2 py-1 text-xs font-medium whitespace-nowrap text-black opacity-0 transition-all duration-300 group-hover/dock:translate-x-0 group-hover/dock:opacity-100 group-focus-visible/dock:translate-x-0 group-focus-visible/dock:opacity-100">
+                  <span className="pointer-events-none absolute top-1/2 right-[calc(100%+12px)] translate-x-2 -translate-y-1/2 rounded-md bg-signal-yellow px-2 py-1 text-xs font-medium whitespace-nowrap text-black opacity-0 transition-all duration-300 group-hover/dock:translate-x-0 group-hover/dock:opacity-100 group-focus-visible/dock:translate-x-0 group-focus-visible/dock:opacity-100">
                     {item.label}
                   </span>
                 </Link>
@@ -130,7 +130,7 @@ export function SideDock() {
         aria-label="Back to top"
         tabIndex={showTop ? 0 : -1}
         className={cn(
-          "grid size-12 place-items-center rounded-full border border-white/5 bg-[#161616]/90 text-white/70 backdrop-blur-md transition-all duration-300 hover:text-primary",
+          "grid size-12 place-items-center rounded-lg border border-white/5 bg-graphite/90 text-white/70 backdrop-blur-md transition-all duration-300 hover:text-primary",
           showTop ? "visible opacity-100" : "invisible opacity-0",
         )}
       >
@@ -158,7 +158,7 @@ export function MobileBar({ siteName }: { siteName: string }) {
 
   return (
     <div className="lg:hidden">
-      <div className="fixed inset-x-3 top-3 z-50 flex items-center justify-between rounded-full border border-white/5 bg-[#161616]/90 py-1.5 pr-1.5 pl-5 backdrop-blur-md">
+      <div className="fixed inset-x-3 top-3 z-50 flex items-center justify-between rounded-lg border border-white/5 bg-graphite/90 py-1.5 pr-1.5 pl-5 backdrop-blur-md">
         <Link href="/" className="text-lg font-medium tracking-[-0.02em] text-white">
           {siteName}
         </Link>
@@ -168,7 +168,7 @@ export function MobileBar({ siteName }: { siteName: string }) {
           aria-expanded={open}
           aria-controls="mobile-menu"
           aria-label={open ? "Close menu" : "Open menu"}
-          className="grid size-10 place-items-center rounded-full bg-white/5 text-white"
+          className="grid size-10 place-items-center rounded-lg bg-white/5 text-white"
         >
           {open ? <RiCloseLine className="size-5" /> : <RiMenuLine className="size-5" />}
         </button>
@@ -177,7 +177,7 @@ export function MobileBar({ siteName }: { siteName: string }) {
         id="mobile-menu"
         hidden={!open}
         data-lenis-prevent
-        className="fixed inset-x-3 top-[72px] z-50 max-h-[calc(100dvh-90px)] overflow-y-auto rounded-[24px] border border-white/5 bg-[#161616] p-3 shadow-2xl"
+        className="fixed inset-x-3 top-[72px] z-50 max-h-[calc(100dvh-90px)] overflow-y-auto rounded-[24px] border border-white/5 bg-graphite p-3 shadow-2xl"
       >
         <nav aria-label="Primary">
           <ul className="grid gap-1">

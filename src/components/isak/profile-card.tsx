@@ -27,8 +27,8 @@ export function ProfileCard({ siteName, intro, portrait, socialLinks }: Props) {
       data-profile-card
       className="relative z-30 flex px-3 pt-[76px] transition-all duration-300 ease-out min-[1440px]:max-w-[480px] min-[1600px]:left-12 lg:fixed lg:top-8 lg:bottom-8 lg:left-4 lg:w-full lg:max-w-[400px] lg:items-center lg:p-0"
     >
-      <div className="relative flex w-full rounded-[24px] bg-[#161616] p-1.5 shadow-[0_30px_80px_-30px_rgb(0_0_0/0.9)] lg:h-full lg:max-h-[calc(100vh-48px)]">
-        <div className="relative isolate min-h-[560px] w-full overflow-hidden rounded-[18px] bg-[#0f0f0f] lg:min-h-0">
+      <div className="relative flex w-full rounded-[24px] bg-graphite p-1.5 shadow-[0_30px_80px_-30px_rgb(0_0_0/0.9)] lg:h-full lg:max-h-[calc(100vh-48px)]">
+        <div className="relative isolate min-h-[560px] w-full overflow-hidden rounded-[18px] bg-void lg:min-h-0">
           {portrait && (
             <MediaImage
               image={portrait}
@@ -51,7 +51,7 @@ export function ProfileCard({ siteName, intro, portrait, socialLinks }: Props) {
           <Link
             href="/"
             aria-label={`${siteName} — home`}
-            className="absolute top-8 left-8 grid size-10 place-items-center rounded-full bg-white/90 font-display text-2xl leading-none font-semibold text-black xl:top-10 xl:left-10"
+            className="absolute top-8 left-8 grid size-10 place-items-center rounded-lg bg-white/90 font-display text-2xl leading-none font-semibold text-black xl:top-10 xl:left-10"
           >
             {initial}
           </Link>
@@ -65,7 +65,7 @@ export function ProfileCard({ siteName, intro, portrait, socialLinks }: Props) {
                     target="_blank"
                     rel="noopener noreferrer me"
                     aria-label={SOCIAL_LABELS[link.platform]}
-                    className="grid size-10 place-items-center rounded-full bg-black/40 text-white backdrop-blur-md transition-colors duration-300 hover:bg-white hover:text-black"
+                    className="grid size-10 place-items-center rounded-lg bg-black/40 text-white backdrop-blur-md transition-colors duration-300 hover:bg-white hover:text-black"
                   >
                     <SocialIcon platform={link.platform} className="size-[18px]" />
                   </a>
@@ -77,8 +77,8 @@ export function ProfileCard({ siteName, intro, portrait, socialLinks }: Props) {
           <div className="absolute right-8 bottom-8 left-8 xl:right-10 xl:bottom-10 xl:left-10">
             <p className="!mb-5 flex items-center gap-2 text-sm font-medium text-white/75">
               <span className="relative flex size-2">
-                <span className="absolute inline-flex size-full animate-ping rounded-full bg-primary opacity-60" />
-                <span className="relative inline-flex size-2 rounded-full bg-primary" />
+                <span className="absolute inline-flex size-full animate-ping rounded-full bg-signal-yellow opacity-60" />
+                <span className="relative inline-flex size-2 rounded-full bg-signal-yellow" />
               </span>
               {siteConfig.availability}
             </p>
